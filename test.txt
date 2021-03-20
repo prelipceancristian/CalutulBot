@@ -1,0 +1,63 @@
+//const fs = require('fs');
+
+// fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/help.txt', 'utf8', function (err, data) {
+//     if (err){
+//         return console.log(err);
+//     }
+//     helpText = data;
+// });
+
+
+
+// fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/replies.txt', 'utf8', function (err,data) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     replies = data.split("\n");
+// });
+
+// fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/rareReplies.txt', 'utf8', function (err,data) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     ultraRareReplies = data.split("\n");
+// });
+
+
+
+// fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Music/predefinedCommandsAndPaths.csv', 'utf8', function (err,data) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     args = data.split('\n');
+//     let whatev = args.pop();
+//     whatev = args.shift();
+//     let counter = 0;
+//     args.forEach(element => {
+//         temp = element.split(',');
+//         predefinedCommandsList[counter] = temp[0];
+//         predefinedPathList[counter] = temp[1].replace('\r', '');
+//         counter++;
+//     });
+// });
+
+
+
+// fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Music/outputMisc.txt', 'utf8', function (err,data) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     temp = data;
+//     miscMusicTitles = temp.split("\n");
+//     for(let i = 0; i < miscMusicTitles.length; i++){
+//         miscMusicTitles[i] = miscMusicTitles[i].replace('\r', '');
+//         miscMusicTitles[i] = miscMusicTitles[i].replace('.mp3', '');
+//         miscMusicTitles[i] = miscMusicTitles[i].replace(' ', '');
+//     }
+//     miscMusicTitles.splice(miscMusicTitles.indexOf(''), 1);
+//     numberOfMisc = miscMusicTitles.length;
+//     let ccounter = 1;
+//     for(let i = 0; i < miscMusicTitles.length; i++) {
+//         autoReply += ccounter++ +  ". **!" + miscMusicTitles[i] + "**\n";
+//     }
+// });

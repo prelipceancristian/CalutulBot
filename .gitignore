@@ -1,0 +1,12 @@
+.env
+Dialogue/*.txt
+Music/*.mp3
+Music/Basic/*.mp3
+Music/Burp/*.mp3
+Music/Kanye/*.mp3
+Music/Madness/*.mp3
+Music/Misc/*.mp3
+Music/Skree/*.mp3
+Music/Ultrarare/*.mp3
+Music/*.txt
+node_modules
