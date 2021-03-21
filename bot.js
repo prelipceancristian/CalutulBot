@@ -16,6 +16,7 @@ const sD = require('./modules/setupData');
 const mt = require('./modules/mute');
 const lat = require('./modules/latin');
 const em = require('./modules/emojify');
+const rep = require('./modules/replyLongText');
 
 let predefinedCommandsList = [];
 let predefinedPathList = [];
@@ -132,7 +133,7 @@ async function gotMessage(msg){// this function right here is async, which means
         }
 
         if(msg.content.startsWith('!help')){
-            return msg.reply(helpText);
+            return rep.replyLongText(msg, helpText);
         }
 
         if(msg.content.startsWith("!autohelp")){
