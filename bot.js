@@ -5,6 +5,7 @@
 //TODO: user specific commands
 //TODO: text to latinus
 //TODO: toggle always on mode
+
 require('dotenv').config(); // use environment files
 
 const Discord = require('discord.js');
@@ -13,6 +14,8 @@ const dPS = require('./modules/defaultPlaySound');
 const mC = require('./modules/multicastPlay');
 const sD = require('./modules/setupData');
 const mt = require('./modules/mute');
+const lat = require('./modules/latin');
+const em = require('./modules/emojify');
 
 let predefinedCommandsList = [];
 let predefinedPathList = [];
@@ -172,6 +175,14 @@ async function gotMessage(msg){// this function right here is async, which means
 
         if(msg.content.startsWith("!unmute")){
             mt.unmuteUser(msg);
+        }
+
+        if(msg.content.startsWith("!latin")){
+            msg.reply(lat.textToLatin(msg));
+        }
+
+        if(msg.content.startsWith("!emojify")){
+            msg.reply(em.emojify(msg));
         }
 }
 
