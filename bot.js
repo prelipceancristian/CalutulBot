@@ -25,6 +25,10 @@ const numberOfUltraRareVoiceReplies = 5;
 //TODO: remake load and unload
 let burpTimer = new Date(2020, 1, 1, 0, 0, 0);
 const numberOfBurpFiles = 3;
+let enableChatFilter = false;
+let bannedWords = sD.loadBannedWords();
+console.log(bannedWords);
+const adminName = "monkey king";
 let isLoaded = false;
 let miscMusicTitles = [];
 let kanyeMusicTitles = [];
@@ -61,130 +65,161 @@ client.on('message', gotMessage);
 async function gotMessage(msg){// this function right here is async, which means it allows using await for functions that return promises
 
         console.log(msg.content);
-        let tokens = msg.content.split(' ');
-		if(typeof msg.mentions.users.first() !== "undefined"){
-            if(msg.mentions.users.first().username == "CalutulBot")
-                msg.reply('🖕');
-        }
-        if(!msg.author.bot)
-        {
-            let chance = Math.floor(Math.random() * 100);
-            //console.log(chance);
-            if(chance <= 2){
-                //ultrarare reply
-                let index = Math.floor(Math.random() * ultraRareReplies.length);
-                msg.reply('**' + ultraRareReplies[index] + '**');
+        if(enableChatFilter)
+            msg.content.replace(/[^a-zA-Z ]/g, "").split(" ").forEach(element => {
+                if(bannedWords.includes(element.toLowerCase()))
+                    //msg.channel.send("BANNED WORD DETECTED");
+                    msg.delete({ timeout: 0, reason: "User used a banned word: " + element})
+                    .then(msg => {
+                        console.log(`Deleted message from ${msg.author.username}`);
+                        msg.channel.send(`<@${msg.author.id}> not cool man, that is a banned word`);
+                })
+                    .catch(console.error);
+            });
+        else{
+            if(typeof msg.mentions.users.first() !== "undefined"){
+                if(msg.mentions.users.first().username == "CalutulBot")
+                    msg.reply('🖕');
             }
-            else if (chance <= 12){
-                let index = Math.floor(Math.random() * replies.length);
-                msg.reply(replies[index]);
+            if(!msg.author.bot)
+            {
+                let chance = Math.floor(Math.random() * 100);
+                //console.log(chance);
+                if(chance <= 2){
+                    //ultrarare reply
+                    let index = Math.floor(Math.random() * ultraRareReplies.length);
+                    msg.reply('**' + ultraRareReplies[index] + '**');
+                }
+                else if (chance <= 12){
+                    let index = Math.floor(Math.random() * replies.length);
+                    msg.reply(replies[index]);
+                }
             }
-        }
-    
-        if(predefinedCommandsList.includes(msg.content)){
-            dPS.defaultPlaySound(msg, predefinedPathList[predefinedCommandsList.indexOf(msg.content)]);
-        }
-
-        if(miscMusicTitles.includes(msg.content.replace('!', '')) && msg.content[0] == '!'){
-            let miscFilePath = "./Music/Misc/" + msg.content.replace('!', '') + ".mp3";;
-            dPS.defaultPlaySound(msg, miscFilePath);          
-        }
-
-        if (msg.content.startsWith('!calutu')){
-            let rarity = Math.floor(Math.random() * 100);
-            let newIndex = 0;
-            let newFilePath = "";
-            if(rarity < 10){
-                newIndex = Math.floor(Math.random() * numberOfUltraRareVoiceReplies) + 1;
-                newFilePath = "./Music/UltraRare/Calutul" + newIndex.toString() + ".mp3";
+        
+            if(predefinedCommandsList.includes(msg.content.toLowerCase())){
+                dPS.defaultPlaySound(msg, predefinedPathList[predefinedCommandsList.indexOf(msg.content)]);
             }
-            else{
-                newIndex = Math.floor(Math.random() * numberOfBasicVoiceReplies) + 1;
-                newFilePath = "./Music/Basic/Calutul" + newIndex.toString() + ".mp3";
+
+            if(miscMusicTitles.includes(msg.content.replace('!', '').toLowerCase()) && msg.content[0] == '!'){
+                let miscFilePath = "./Music/Misc/" + msg.content.replace('!', '') + ".mp3";;
+                dPS.defaultPlaySound(msg, miscFilePath);          
             }
-            dPS.defaultPlaySound(msg, newFilePath);//TODO: make this not dependent on the numberOf...
-        }
 
-        if (msg.content.startsWith('!burp')){
-            let timeLimit = 5;
-            let now = new Date();
-            let cringeFactor = now - burpTimer;
-            cringeFactor = Math.ceil(cringeFactor / (1000 * 60));
-            let burpMulticast = mC.calculateMulticast();
-            if(cringeFactor < timeLimit){
-                msg.reply("The last burp command was " + cringeFactor.toString() + ' min ago. Kinda cringe. Try again in ' + (timeLimit - cringeFactor).toString() + ' min');
-                dPS.defaultPlaySound(msg, "./Music/Wee.mp3")
-            }    
-            else{
-                if (!msg.member.voice.channel) return msg.reply("Yo you ain't in the channel man not cool.");
-
-                if (msg.guild.me.voice.channel) return msg.reply("I'm already talking lmao");
-    
-                msg.member.voice.channel.join().then(VoiceConnection => {
-                    if(burpMulticast != 1)
-                        msg.reply("**MULTICAST X" + burpMulticast.toString() + "!!**");
-                    else
-                        msg.reply("Only once lmao");
-                    let burpFileIndex = Math.floor(Math.random() * numberOfBurpFiles) + 1;
-                    multicastPlay(VoiceConnection, "./Music/Burp/Burp" + burpFileIndex.toString() + ".mp3", burpMulticast);
-                }).catch(e => console.log(e))
+            if (msg.content.toLowerCase().startsWith('!calutu')){
+                let rarity = Math.floor(Math.random() * 100);
+                let newIndex = 0;
+                let newFilePath = "";
+                if(rarity < 10){
+                    newIndex = Math.floor(Math.random() * numberOfUltraRareVoiceReplies) + 1;
+                    newFilePath = "./Music/UltraRare/Calutul" + newIndex.toString() + ".mp3";
+                }
+                else{
+                    newIndex = Math.floor(Math.random() * numberOfBasicVoiceReplies) + 1;
+                    newFilePath = "./Music/Basic/Calutul" + newIndex.toString() + ".mp3";
+                }
+                dPS.defaultPlaySound(msg, newFilePath);//TODO: make this not dependent on the numberOf...
             }
-            //TODO: make multicastPlay a separate function
-        }
 
-        if(msg.content.startsWith('!help')){
-            return rep.replyLongText(msg, helpText);
-        }
+            if (msg.content.toLowerCase().startsWith('!burp')){
+                let timeLimit = 5;
+                let now = new Date();
+                let cringeFactor = now - burpTimer;
+                cringeFactor = Math.ceil(cringeFactor / (1000 * 60));
+                let burpMulticast = mC.calculateMulticast();
+                if(cringeFactor < timeLimit){
+                    msg.reply("The last burp command was " + cringeFactor.toString() + ' min ago. Kinda cringe. Try again in ' + (timeLimit - cringeFactor).toString() + ' min');
+                    dPS.defaultPlaySound(msg, "./Music/Wee.mp3")
+                }    
+                else{
+                    if (!msg.member.voice.channel) return msg.reply("Yo you ain't in the channel man not cool.");
 
-        if(msg.content.startsWith("!autohelp")){
-            return msg.reply(autoReply);
-        }
-
-        if(msg.content.startsWith("!askKanye")){
-            let f = "./Music/Kanye/" + kanyeMusicTitles[Math.floor(Math.random() * kanyeMusicTitles.length)];
-            dPS.defaultPlaySound(msg, f);
-        }
-
-        if(msg.content.startsWith("!kick")){
-            args = msg.content.split(" ");
-            let myUser = msg.mentions.users.first();
-            if (myUser){
-                let myMember = msg.guild.member(myUser);
-                if(myMember){
-                    if(myMember.hasPermission('KICK_MEMBERS')){
-                        myMember.kick('get nay nayed(u were really bad and got kicked)')
-                        .then(() => {
-                            msg.reply(`${myUser} succesfully got nay nayed(kicked)!`);
-                        })
-                        .catch(err => {
-                            msg.reply("Unable to ban the member!");
-                            console.log("uh oh: " + err);
-                        });
-                    }
-                    else
-                        msg.reply("You don't have the permission to kick others!");
-                } 
+                    if (msg.guild.me.voice.channel) return msg.reply("I'm already talking lmao");
+        
+                    msg.member.voice.channel.join().then(VoiceConnection => {
+                        if(burpMulticast != 1)
+                            msg.reply("**MULTICAST X" + burpMulticast.toString() + "!!**");
+                        else
+                            msg.reply("Only once lmao");
+                        let burpFileIndex = Math.floor(Math.random() * numberOfBurpFiles) + 1;
+                        multicastPlay(VoiceConnection, "./Music/Burp/Burp" + burpFileIndex.toString() + ".mp3", burpMulticast);
+                    }).catch(e => console.log(e))
+                }
+                //TODO: make multicastPlay a separate function
             }
-            else{
-                msg.reply('You forgot to mention the user!');
+
+            if(msg.content.toLowerCase().startsWith('!help')){
+                return rep.replyLongText(msg, helpText);
             }
-        }
 
-        if(msg.content.startsWith("!mute")){
-            mt.muteUser(msg);
-        }
+            if(msg.content.toLowerCase().startsWith("!autohelp")){
+                return msg.reply(autoReply);
+            }
 
-        if(msg.content.startsWith("!unmute")){
-            mt.unmuteUser(msg);
-        }
+            if(msg.content.toLowerCase().startsWith("!askkanye")){
+                let f = "./Music/Kanye/" + kanyeMusicTitles[Math.floor(Math.random() * kanyeMusicTitles.length)];
+                dPS.defaultPlaySound(msg, f);
+            }
 
-        if(msg.content.startsWith("!latin")){
-            msg.reply(lat.textToLatin(msg));
-        }
+            if(msg.content.toLowerCase().startsWith("!kick")){
+                args = msg.content.split(" ");
+                let myUser = msg.mentions.users.first();
+                if (myUser){
+                    let myMember = msg.guild.member(myUser);
+                    if(myMember){
+                        if(myMember.hasPermission('ADMINISTRATOR')){
+                            myMember.kick('get nay nayed(u were really bad and got kicked)')
+                            .then(() => {
+                                msg.reply(`${myUser} succesfully got nay nayed(kicked)!`);
+                            })
+                            .catch(err => {
+                                msg.reply("Unable to ban the member!");
+                                console.log("uh oh: " + err);
+                            });
+                        }
+                        else
+                            msg.reply("You don't have the permission to kick others!");
+                    } 
+                }
+                else{
+                    msg.reply('You forgot to mention the user!');
+                }
+            }
 
-        if(msg.content.startsWith("!emojify")){
-            msg.reply(em.emojify(msg));
-        }
+            if(msg.content.toLowerCase().startsWith("!mute")){
+                mt.muteUser(msg);
+            }
+
+            if(msg.content.toLowerCase().startsWith("!unmute")){
+                mt.unmuteUser(msg);
+            }
+
+            if(msg.content.toLowerCase().startsWith("!latin")){
+                msg.reply(lat.textToLatin(msg));
+            }
+
+            if(msg.content.toLowerCase().startsWith("!emojify")){
+                msg.reply(em.emojify(msg));
+            }
+
+            if(msg.content.toLowerCase().startsWith("!enablefilter")){
+                if(msg.member.roles.cache.find(r => r.name === adminName)){
+                    enableChatFilter = true;
+                    msg.reply("The word filter is on.");
+                }
+                else
+                    msg.reply("You are not the admin.");
+
+            }
+
+            if(msg.content.toLowerCase().startsWith("!disablefilter")){
+                if(msg.member.roles.cache.find(r => r.name === adminName)){
+                    enableChatFilter = false;
+                    msg.reply("The word filter is off.");
+                }
+                else
+                    msg.reply("You are not the admin.");
+            }
+    }
 }
 
 //client.listen(process.env.PORT || 5000);

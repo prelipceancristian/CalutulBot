@@ -61,5 +61,13 @@ module.exports = {
             temp[i] = temp[i].replace(' ', '');
         }
         return temp;
+    },
+
+    loadBannedWords: () => {
+        let temp = fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/bannedWords.txt', 'utf8').split('\n');
+        for(let i = 0; i < temp.length; i++){
+            temp[i] = temp[i].replace('\r', '');
+        }
+        return temp;
     }
 }
