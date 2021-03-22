@@ -3,7 +3,6 @@
 //TODO: do a switch case instead of this very long if
 
 //TODO: user specific commands
-//TODO: text to latinus
 //TODO: toggle always on mode
 
 require('dotenv').config(); // use environment files
@@ -33,6 +32,14 @@ let isLoaded = false;
 let miscMusicTitles = [];
 let kanyeMusicTitles = [];
 let autoReply = "Automatically generated commands:\n";
+
+const BankAccount = require("./modules/CalutulBank/Domain/BankAccount");
+const Repo = require("./modules/CalutulBank/Repository/Repo");
+const Service = require("./modules/CalutulBank/Business/Service");
+const KeyError = require("./modules/CalutulBank/Errors/KeyError");
+let repo = new Repo();
+let service = new Service(repo);
+
 
 [predefinedCommandsList, predefinedPathList] = sD.loadPredefined(predefinedCommandsList, predefinedPathList);
 [miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply);
@@ -218,6 +225,80 @@ async function gotMessage(msg){// this function right here is async, which means
                 }
                 else
                     msg.reply("You are not the admin.");
+            }
+
+            if(msg.content.toLowerCase().startsWith("!bankcreate")){
+                try{
+                    console.log("Trying to create bank account for " + msg.author.id);
+                    service.createAccount(msg.author.id, 0);
+                    msg.reply("Account created!");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e.message);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!bankstatus")){
+                try{
+                    msg.reply("Your current balance is: " + service.readAccount(msg.author.id).amount + " CalutulCoins");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!bankset")){
+                args = msg.content.split(" ");
+                try{
+                    console.log("Setting the bank amount to " + args[1]);
+                    service.updateAccount(msg.author.id, parseInt(args[1]));
+                    msg.reply("Success!");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!test")){
+                console.log(repo);
+            }
+            
+            if(msg.content.toLowerCase().startsWith("!bankadd")){
+                args = msg.content.split(" ");
+                try{
+                    console.log("Adding " + args[1] + " to the bank account of " + msg.author.id);
+                    service.addToAccount(msg.author.id, parseInt(args[1]));
+                    msg.reply("Success!");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!bankdelete")){
+                try{
+                    console.log("Trying to delete bank account for " + msg.author.id);
+                    console.log(service.deleteAccount(msg.author.id));
+                    msg.reply("Account deleted!");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e.message);
+                }
             }
     }
 }
