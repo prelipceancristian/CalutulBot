@@ -37,7 +37,9 @@ const BankAccount = require("./modules/CalutulBank/Domain/BankAccount");
 const Repo = require("./modules/CalutulBank/Repository/Repo");
 const Service = require("./modules/CalutulBank/Business/Service");
 const KeyError = require("./modules/CalutulBank/Errors/KeyError");
-let repo = new Repo();
+const RepoFile = require("./modules/CalutulBank/Repository/RepoFile");
+let repo = new RepoFile("./bank.json")
+//let repo = new Repo();
 let service = new Service(repo);
 
 
@@ -230,7 +232,7 @@ async function gotMessage(msg){// this function right here is async, which means
             if(msg.content.toLowerCase().startsWith("!bankcreate")){
                 try{
                     console.log("Trying to create bank account for " + msg.author.id);
-                    service.createAccount(msg.author.id, 0);
+                    const res = await service.createAccount(msg.author.id, 0);
                     msg.reply("Account created!");
                 }
                 catch(e){
@@ -243,13 +245,18 @@ async function gotMessage(msg){// this function right here is async, which means
 
             if(msg.content.toLowerCase().startsWith("!bankstatus")){
                 try{
-                    msg.reply("Your current balance is: " + service.readAccount(msg.author.id).amount + " CalutulCoins");
+                    const res = await service.readAccount(msg.author.id);
+                    console.log("In bot.js:")
+                    console.log(res);
+                    msg.reply("Your current balance is: " + res.amount + " CalutulCoins");
                 }
                 catch(e){
-                    if (e instanceof KeyError)
-                        msg.reply(e.message);
-                    else
-                        console.log(e);
+                    // if (e instanceof KeyError)
+                    //     msg.reply(e.message);
+                    // else
+                    //     console.log(e);
+                    console.log("error caught in the main body");
+                    msg.reply(e.message);
                 }
             }
 
@@ -257,7 +264,7 @@ async function gotMessage(msg){// this function right here is async, which means
                 args = msg.content.split(" ");
                 try{
                     console.log("Setting the bank amount to " + args[1]);
-                    service.updateAccount(msg.author.id, parseInt(args[1]));
+                    const res = await service.updateAccount(msg.author.id, parseInt(args[1]));
                     msg.reply("Success!");
                 }
                 catch(e){
@@ -290,8 +297,11 @@ async function gotMessage(msg){// this function right here is async, which means
             if(msg.content.toLowerCase().startsWith("!bankdelete")){
                 try{
                     console.log("Trying to delete bank account for " + msg.author.id);
-                    console.log(service.deleteAccount(msg.author.id));
-                    msg.reply("Account deleted!");
+                    const res = service.deleteAccount(msg.author.id);
+                    if(res)
+                        msg.reply("Account deleted!");
+                    else
+                        msg.reply("Something went wrong!");
                 }
                 catch(e){
                     if (e instanceof KeyError)
