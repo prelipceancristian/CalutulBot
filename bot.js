@@ -246,17 +246,14 @@ async function gotMessage(msg){// this function right here is async, which means
             if(msg.content.toLowerCase().startsWith("!bankstatus")){
                 try{
                     const res = await service.readAccount(msg.author.id);
-                    console.log("In bot.js:")
-                    console.log(res);
+
                     msg.reply("Your current balance is: " + res.amount + " CalutulCoins");
                 }
                 catch(e){
-                    // if (e instanceof KeyError)
-                    //     msg.reply(e.message);
-                    // else
-                    //     console.log(e);
-                    console.log("error caught in the main body");
+                    if (e instanceof KeyError)
                     msg.reply(e.message);
+                else
+                    console.log(e);
                 }
             }
 

@@ -14,8 +14,8 @@ class Service{
 
     async readAccount(UId){
         const res = await this.repo.read(UId);
-        console.log("In service:")
-        console.log(res);
+        //console.log("In service:")
+        //console.log(res);
         return res;
     }
 
