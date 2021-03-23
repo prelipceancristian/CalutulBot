@@ -5,31 +5,36 @@ class Service{
         this.repo = repo;
     }
 
-    createAccount(UId, amount){
+    async createAccount(UId, amount){
         let bA = new BankAccount(UId, amount);
         //TODO: add a validator
-        this.repo.create(bA);
+        await this.repo.create(bA);
         return true;
     }
 
-    readAccount(UId){
-        return this.repo.read(UId);
+    async readAccount(UId){
+        const res = await this.repo.read(UId);
+        //console.log("In service:")
+        //console.log(res);
+        return res;
     }
 
-    updateAccount(UId, newAmount){
+    async updateAccount(UId, newAmount){
         let bA = new BankAccount(UId, newAmount);
-        this.repo.update(bA);
-        return true;
+        const res = await this.repo.update(bA);
+        return res;
     }
 
-    deleteAccount(UId){
-        return this.repo.delete(UId);
+    async deleteAccount(UId){
+        const res = await this.repo.delete(UId);
+        return res;
     }
 
-    addToAccount(UId, amountToAdd){
-        let oldAmount = this.repo.read(UId).amount;
+    async addToAccount(UId, amountToAdd){
+        const oldAcc = await this.repo.read(UId);
+        const oldAmount = oldAcc.amount;
         let bA = new BankAccount(UId, oldAmount + amountToAdd);
-        this.repo.update(bA);
+        const res = await this.repo.update(bA);
         return true;
     }
 
