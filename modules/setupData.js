@@ -34,6 +34,7 @@ module.exports = {
             temp = element.split(',');
             predefinedCommandsList[counter] = temp[0];
             predefinedPathList[counter] = temp[1].replace('\r', '');
+            predefinedPathList[counter] = predefinedPathList[counter].toLowerCase();
             counter++;
         });
         return [predefinedCommandsList, predefinedPathList];
@@ -45,6 +46,7 @@ module.exports = {
             miscMusicTitles[i] = miscMusicTitles[i].replace('\r', '');
             miscMusicTitles[i] = miscMusicTitles[i].replace('.mp3', '');
             miscMusicTitles[i] = miscMusicTitles[i].replace(' ', '');
+            miscMusicTitles[i] = miscMusicTitles[i].toLowerCase();
         }
         miscMusicTitles.splice(miscMusicTitles.indexOf(''), 1);
         let ccounter = 1;
@@ -59,6 +61,7 @@ module.exports = {
         for(let i = 0; i < temp.length; i++){
             temp[i] = temp[i].replace('\r', '');
             temp[i] = temp[i].replace(' ', '');
+            temp[i] = temp[i].toLowerCase();
         }
         return temp;
     },

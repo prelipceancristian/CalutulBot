@@ -38,6 +38,17 @@ class Service{
         return true;
     }
 
+    async gift(giverId, recieverId, value){
+        const giverAcc = await this.repo.read(giverId);
+        const recieverAcc = await this.repo.read(recieverId);
+        if (giverAcc.amount < value)
+            throw new Error("You don't have enough money!");
+        const updatedGiverAcc = new BankAccount(giverId, giverAcc.amount - value);
+        const updatedRecieverAcc = new BankAccount(recieverId, recieverId.amount + value);
+        const res1 = await this.repo.update(updatedGiverAcc);
+        const res2 = await this.repo.update(updatedRecieverAcc);
+    }
+
 }
 
 module.exports = Service;

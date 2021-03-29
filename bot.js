@@ -257,54 +257,67 @@ async function gotMessage(msg){// this function right here is async, which means
                 }
             }
 
-            if(msg.content.toLowerCase().startsWith("!bankset")){
-                args = msg.content.split(" ");
-                try{
-                    console.log("Setting the bank amount to " + args[1]);
-                    const res = await service.updateAccount(msg.author.id, parseInt(args[1]));
-                    msg.reply("Success!");
-                }
-                catch(e){
-                    if (e instanceof KeyError)
-                        msg.reply(e.message);
-                    else
-                        console.log(e);
-                }
-            }
+            // if(msg.content.toLowerCase().startsWith("!bankset")){
+            //     args = msg.content.split(" ");
+            //     try{
+            //         console.log("Setting the bank amount to " + args[1]);
+            //         const res = await service.updateAccount(msg.author.id, parseInt(args[1]));
+            //         msg.reply("Success!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e);
+            //     }
+            // }
 
-            if(msg.content.toLowerCase().startsWith("!test")){
-                console.log(repo);
-            }
+            // if(msg.content.toLowerCase().startsWith("!test")){
+            //     console.log(repo);
+            // }
             
-            if(msg.content.toLowerCase().startsWith("!bankadd")){
-                args = msg.content.split(" ");
+            // if(msg.content.toLowerCase().startsWith("!bankadd")){
+            //     args = msg.content.split(" ");
+            //     try{
+            //         console.log("Adding " + args[1] + " to the bank account of " + msg.author.id);
+            //         service.addToAccount(msg.author.id, parseInt(args[1]));
+            //         msg.reply("Success!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e);
+            //     }
+            // }
+
+            // if(msg.content.toLowerCase().startsWith("!bankdelete")){
+            //     try{
+            //         console.log("Trying to delete bank account for " + msg.author.id);
+            //         const res = service.deleteAccount(msg.author.id);
+            //         if(res)
+            //             msg.reply("Account deleted!");
+            //         else
+            //             msg.reply("Something went wrong!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e.message);
+            //     }
+            // }
+
+            if(msg.content.toLowerCase().startsWith("!bankgift")){
                 try{
-                    console.log("Adding " + args[1] + " to the bank account of " + msg.author.id);
-                    service.addToAccount(msg.author.id, parseInt(args[1]));
-                    msg.reply("Success!");
+                    args = msg.content.split(" ");
+                    service.gift(args[0], args[1], parseInt(args[2]));// FIXME: parsing wrong data i think
                 }
                 catch(e){
                     if (e instanceof KeyError)
                         msg.reply(e.message);
                     else
                         console.log(e);
-                }
-            }
-
-            if(msg.content.toLowerCase().startsWith("!bankdelete")){
-                try{
-                    console.log("Trying to delete bank account for " + msg.author.id);
-                    const res = service.deleteAccount(msg.author.id);
-                    if(res)
-                        msg.reply("Account deleted!");
-                    else
-                        msg.reply("Something went wrong!");
-                }
-                catch(e){
-                    if (e instanceof KeyError)
-                        msg.reply(e.message);
-                    else
-                        console.log(e.message);
                 }
             }
     }
