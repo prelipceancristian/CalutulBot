@@ -16,6 +16,8 @@ const mt = require('./modules/mute');
 const lat = require('./modules/latin');
 const em = require('./modules/emojify');
 const rep = require('./modules/replyLongText');
+const emb = require('./modules/embededMessage');
+const tp = require('./modules/tip');
 
 let predefinedCommandsList = [];
 let predefinedPathList = [];
@@ -38,6 +40,7 @@ const Repo = require("./modules/CalutulBank/Repository/Repo");
 const Service = require("./modules/CalutulBank/Business/Service");
 const KeyError = require("./modules/CalutulBank/Errors/KeyError");
 const RepoFile = require("./modules/CalutulBank/Repository/RepoFile");
+const { indexOf } = require('ffmpeg-static');
 let repo = new RepoFile("./bank.json")
 //let repo = new Repo();
 let service = new Service(repo);
@@ -87,7 +90,7 @@ async function gotMessage(msg){// this function right here is async, which means
             });
         else{
             if(typeof msg.mentions.users.first() !== "undefined"){
-                if(msg.mentions.users.first().username == "CalutulBot")
+                if(msg.mentions.users.first().username == "CalutulBot" || msg.mentions.users.first().username == "MehiCalul")
                     msg.reply('🖕');
             }
             if(!msg.author.bot)
@@ -310,13 +313,42 @@ async function gotMessage(msg){// this function right here is async, which means
 
             if(msg.content.toLowerCase().startsWith("!bankgift")){
                 try{
-                    args = msg.content.split(" ");
-                    service.gift(args[0], args[1], parseInt(args[2]));// FIXME: parsing wrong data i think
+                    args = msg.content.split(" ");//FIXME: CHECK FOR MULTIPLE SPACES
+                    console.log(args[2]);
+                    service.gift(msg.author.id, args[1].slice(3, args[1].indexOf('>')), args[2]);// FIXME: parsing wrong data i think
                 }
                 catch(e){
                     if (e instanceof KeyError)
                         msg.reply(e.message);
                     else
+                        console.log(e);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!tip")){
+                try{
+                    args = msg.content.split(" ");//FIXME: CHECK FOR MULTIPLE SPACES
+                    service.gift(msg.author.id, args[1].slice(3, args[1].indexOf('>')), 50);// FIXME: parsing wrong data i think
+                    console.log(msg.author.id)
+                    msg.channel.send(args[1] + ", hai ca esti destept");
+                    if(msg.member.voice.channel)
+                        dPS.defaultPlaySound(msg, "./Music/coins.wav");
+                }
+                catch(e){
+                    if (e instanceof KeyError)
+                        msg.reply(e.message);
+                    else
+                        console.log(e);
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!testemb")){
+                try{
+                    console.log(msg.author);
+                    console.log(msg.mentions.users.first())
+                    msg.channel.send({files: ["./Images/buyback.png"], embed: tp.tip(msg.author, msg.mentions.users.first(), "100")});
+                }
+                catch(e){
                         console.log(e);
                 }
             }

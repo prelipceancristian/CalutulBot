@@ -43,8 +43,13 @@ class Service{
         const recieverAcc = await this.repo.read(recieverId);
         if (giverAcc.amount < value)
             throw new Error("You don't have enough money!");
-        const updatedGiverAcc = new BankAccount(giverId, giverAcc.amount - value);
-        const updatedRecieverAcc = new BankAccount(recieverId, recieverId.amount + value);
+        console.log(giverAcc)
+        console.log(recieverAcc)
+        console.log(value)
+        const updatedGiverAcc = new BankAccount(giverId, giverAcc.amount - parseInt(value));
+        const updatedRecieverAcc = new BankAccount(recieverId, recieverAcc.amount + parseInt(value));
+        console.log(updatedGiverAcc)
+        console.log(updatedRecieverAcc)
         const res1 = await this.repo.update(updatedGiverAcc);
         const res2 = await this.repo.update(updatedRecieverAcc);
     }
