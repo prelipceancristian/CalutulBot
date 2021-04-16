@@ -1,5 +1,4 @@
 //TODO: add parsing and presetting function
-//TODO: create separate files for functions
 //TODO: do a switch case instead of this very long if
 
 //TODO: user specific commands
@@ -41,6 +40,7 @@ const Service = require("./modules/CalutulBank/Business/Service");
 const KeyError = require("./modules/CalutulBank/Errors/KeyError");
 const RepoFile = require("./modules/CalutulBank/Repository/RepoFile");
 const { indexOf } = require('ffmpeg-static');
+const ServiceError = require('./modules/CalutulBank/Errors/ServiceError');
 let repo = new RepoFile("./bank.json")
 //let repo = new Repo();
 let service = new Service(repo);
@@ -312,46 +312,42 @@ async function gotMessage(msg){// this function right here is async, which means
             // }
 
             if(msg.content.toLowerCase().startsWith("!bankgift")){
-                try{
-                    args = msg.content.split(" ");//FIXME: CHECK FOR MULTIPLE SPACES
-                    console.log(args[2]);
-                    service.gift(msg.author.id, args[1].slice(3, args[1].indexOf('>')), args[2]);// FIXME: parsing wrong data i think
-                }
-                catch(e){
-                    if (e instanceof KeyError)
+                args = msg.content.split(" ");
+                console.log(args[2]);
+                service.gift(msg.author.id, msg.mentions.users.first().id, args[2])
+                .catch(e => {
+                    if(e instanceof ServiceError)
+                        msg.reply(e.message);
+                    else if(e instanceof KeyError)
                         msg.reply(e.message);
                     else
-                        console.log(e);
+                        console.log(e.message);
+                    });
                 }
-            }
 
             if(msg.content.toLowerCase().startsWith("!tip")){
-                try{
-                    args = msg.content.split(" ");//FIXME: CHECK FOR MULTIPLE SPACES
-                    service.gift(msg.author.id, args[1].slice(3, args[1].indexOf('>')), 50);// FIXME: parsing wrong data i think
-                    console.log(msg.author.id)
-                    msg.channel.send(args[1] + ", hai ca esti destept");
-                    if(msg.member.voice.channel)
-                        dPS.defaultPlaySound(msg, "./Music/coins.wav");
-                }
-                catch(e){
-                    if (e instanceof KeyError)
-                        msg.reply(e.message);
-                    else
-                        console.log(e);
+                args = msg.content.replace(/\s+/g, ' ').trim().split(" ");
+                console.log(args);
+                console.log(msg.mentions.users.first());
+                if(args.length != 2)
+                    msg.reply("Command usage: !tip @user");
+                else{
+                    service.gift(msg.author.id, msg.mentions.users.first().id, 50)
+                    .then(() => {
+                        msg.channel.send({files: ["./Images/buyback.png"], embed: tp.tip(msg.author, msg.mentions.users.first(), "50")});
+                        if(msg.member.voice.channel)
+                            dPS.defaultPlaySound(msg, "./Music/coins.wav");})
+                    .catch(e => {
+                        if(e instanceof ServiceError)
+                            msg.reply(e.message);
+                        else if(e instanceof KeyError)
+                            msg.reply(e.message);
+                        else
+                            console.log(e.message);
+                    })
                 }
             }
 
-            if(msg.content.toLowerCase().startsWith("!testemb")){
-                try{
-                    console.log(msg.author);
-                    console.log(msg.mentions.users.first())
-                    msg.channel.send({files: ["./Images/buyback.png"], embed: tp.tip(msg.author, msg.mentions.users.first(), "100")});
-                }
-                catch(e){
-                        console.log(e);
-                }
-            }
     }
 }
 

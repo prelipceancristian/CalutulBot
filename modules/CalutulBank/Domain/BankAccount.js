@@ -21,6 +21,10 @@ class BankAccount {
     //     this.UId = other;
     // }
 
+    equals(other){
+        return this.UId == other.UId;
+    }
+
 }
 
 module.exports = BankAccount;

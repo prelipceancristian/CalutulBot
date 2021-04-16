@@ -1,4 +1,5 @@
 const BankAccount = require("../Domain/BankAccount");
+const ServiceError = require("../Errors/ServiceError");
 
 class Service{
     constructor(repo){
@@ -41,6 +42,8 @@ class Service{
     async gift(giverId, recieverId, value){
         const giverAcc = await this.repo.read(giverId);
         const recieverAcc = await this.repo.read(recieverId);
+        if (giverId == recieverId)
+            throw new ServiceError("You cannot send money to yourself!");
         if (giverAcc.amount < value)
             throw new Error("You don't have enough money!");
         console.log(giverAcc)

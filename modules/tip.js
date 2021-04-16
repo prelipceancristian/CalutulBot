@@ -11,12 +11,12 @@ module.exports = {
                 },
                 {
                     name: "Tipped",
-                    value: amount + "CalutulCoins",
+                    value: amount + " CalutulCoins",
                     inline: true,
                 },
                 {
                     name: tipped.username,
-                    value: 'Some value here',
+                    value: '\u200b',
                     inline: true,
                 },
             ],
