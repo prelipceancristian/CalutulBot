@@ -2,7 +2,6 @@
 //TODO: do a switch case instead of this very long if
 
 //TODO: user specific commands
-//TODO: toggle always on mode
 
 require('dotenv').config(); // use environment files
 
@@ -15,7 +14,6 @@ const mt = require('./modules/mute');
 const lat = require('./modules/latin');
 const em = require('./modules/emojify');
 const rep = require('./modules/replyLongText');
-const emb = require('./modules/embededMessage');
 const tp = require('./modules/tip');
 
 let predefinedCommandsList = [];
@@ -33,6 +31,7 @@ let isLoaded = false;
 let miscMusicTitles = [];
 let kanyeMusicTitles = [];
 let autoReply = "Automatically generated commands:\n";
+let alwaysOn = false;
 
 const BankAccount = require("./modules/CalutulBank/Domain/BankAccount");
 const Repo = require("./modules/CalutulBank/Repository/Repo");
@@ -109,12 +108,12 @@ async function gotMessage(msg){// this function right here is async, which means
             }
         
             if(predefinedCommandsList.includes(msg.content.toLowerCase())){
-                dPS.defaultPlaySound(msg, predefinedPathList[predefinedCommandsList.indexOf(msg.content)]);
+                dPS.defaultPlaySound(msg, predefinedPathList[predefinedCommandsList.indexOf(msg.content)], alwaysOn);
             }
 
             if(miscMusicTitles.includes(msg.content.replace('!', '').toLowerCase()) && msg.content[0] == '!'){
                 let miscFilePath = "./Music/Misc/" + msg.content.replace('!', '') + ".mp3";;
-                dPS.defaultPlaySound(msg, miscFilePath);          
+                dPS.defaultPlaySound(msg, miscFilePath, alwaysOn);          
             }
 
             if (msg.content.toLowerCase().startsWith('!calutu')){
@@ -129,7 +128,7 @@ async function gotMessage(msg){// this function right here is async, which means
                     newIndex = Math.floor(Math.random() * numberOfBasicVoiceReplies) + 1;
                     newFilePath = "./Music/Basic/Calutul" + newIndex.toString() + ".mp3";
                 }
-                dPS.defaultPlaySound(msg, newFilePath);//TODO: make this not dependent on the numberOf...
+                dPS.defaultPlaySound(msg, newFilePath, alwaysOn);//TODO: make this not dependent on the numberOf...
             }
 
             if (msg.content.toLowerCase().startsWith('!burp')){
@@ -140,7 +139,7 @@ async function gotMessage(msg){// this function right here is async, which means
                 let burpMulticast = mC.calculateMulticast();
                 if(cringeFactor < timeLimit){
                     msg.reply("The last burp command was " + cringeFactor.toString() + ' min ago. Kinda cringe. Try again in ' + (timeLimit - cringeFactor).toString() + ' min');
-                    dPS.defaultPlaySound(msg, "./Music/Wee.mp3")
+                    dPS.defaultPlaySound(msg, "./Music/Wee.mp3", alwaysOn)
                 }    
                 else{
                     if (!msg.member.voice.channel) return msg.reply("Yo you ain't in the channel man not cool.");
@@ -169,7 +168,7 @@ async function gotMessage(msg){// this function right here is async, which means
 
             if(msg.content.toLowerCase().startsWith("!askkanye")){
                 let f = "./Music/Kanye/" + kanyeMusicTitles[Math.floor(Math.random() * kanyeMusicTitles.length)];
-                dPS.defaultPlaySound(msg, f);
+                dPS.defaultPlaySound(msg, f, alwaysOn);
             }
 
             if(msg.content.toLowerCase().startsWith("!kick")){
@@ -336,7 +335,7 @@ async function gotMessage(msg){// this function right here is async, which means
                     .then(() => {
                         msg.channel.send({files: ["./Images/buyback.png"], embed: tp.tip(msg.author, msg.mentions.users.first(), "50")});
                         if(msg.member.voice.channel)
-                            dPS.defaultPlaySound(msg, "./Music/coins.wav");})
+                            dPS.defaultPlaySound(msg, "./Music/coins.wav", alwaysOn);})
                     .catch(e => {
                         if(e instanceof ServiceError)
                             msg.reply(e.message);
@@ -345,6 +344,19 @@ async function gotMessage(msg){// this function right here is async, which means
                         else
                             console.log(e.message);
                     })
+                }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!toggleon")){
+                alwaysOn = true;
+                msg.channel.send("Always on mode is activated!");
+            }
+
+            if(msg.content.toLowerCase().startsWith("!toggleoff")){
+                alwaysOn = false;
+                msg.channel.send("Always on mode is deactivated!");
+                if(msg.guild.me.voice.channel){
+                    msg.member.voice.channel.join().then(VoiceConnection => VoiceConnection.disconnect());
                 }
             }
 
