@@ -2,12 +2,16 @@ const fs = require('fs');
 
 module.exports = {
     loadOutputMisc: function(){
+        /*
+            The function reads synchronosly the available songs from a given txt file, converting them into an array of music titles.
+            Input: -
+            Output: an array of all songs written in the outputMisc.txt file
+        */
         fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Music/outputMisc.txt', 'utf8', function (err,data) {
             if (err) {
               return console.log(err);
             }
             miscMusicTitles = data;
-            //console.log(miscMusicTitles);
             miscMusicTitles = miscMusicTitles.split("\n");
             for(let i = 0; i < miscMusicTitles.length; i++){
                 miscMusicTitles[i] = miscMusicTitles[i].replace('\r', '');
@@ -18,7 +22,7 @@ module.exports = {
             numberOfMisc = musicTitles.length;
             console.log(miscMusicTitles);
             return miscMusicTitles;
-        }); //FIXME: start working asynchronosly to actually load this funcion in the main body, add comms
+        }); //FIXME:add comms
     },
 
     loadHelpFile: () => fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/help.txt', 'utf8'),

@@ -5,6 +5,7 @@ module.exports = {
         args:
             filePath: string, the path of the soundbite
             msg: the message that activated the command
+            alwaysOn: the state of the alwaysOn option
         ret: message reply if the command was called during an ongoing process, message reply if user is not present in voice channel, no return in all goes well.
         */ 
             if (!msg.member.voice.channel) return msg.reply("We da vezi ca nu esti in voice channel fmm.");

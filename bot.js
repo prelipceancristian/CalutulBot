@@ -1,8 +1,5 @@
 //TODO: add parsing and presetting function
 //TODO: do a switch case instead of this very long if
-
-//TODO: user specific commands
-
 require('dotenv').config(); // use environment files
 
 const Discord = require('discord.js');
@@ -25,7 +22,7 @@ let burpTimer = new Date(2020, 1, 1, 0, 0, 0);
 const numberOfBurpFiles = 3;
 let enableChatFilter = false;
 let bannedWords = sD.loadBannedWords();
-console.log(bannedWords);
+//console.log(bannedWords);
 const adminName = "monkey king";
 let isLoaded = false;
 let miscMusicTitles = [];
@@ -48,7 +45,7 @@ let service = new Service(repo);
 [predefinedCommandsList, predefinedPathList] = sD.loadPredefined(predefinedCommandsList, predefinedPathList);
 [miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply);
 kanyeMusicTitles = sD.loadKanyeMusic();
-console.log(kanyeMusicTitles);
+//console.log(kanyeMusicTitles);
 let helpText = sD.loadHelpFile(); //    WORKS!!!!
 let replies = sD.loadRepliesFile();
 let ultraRareReplies = sD.loadRareRepliesFile();
@@ -67,15 +64,26 @@ function multicastPlay(VoiceConnection, soundPath, multicastFactor){
 client.login(process.env.BOTTOKEN);
 client.on('ready', readyDiscord);
 
+function stringDate(){
+    var currentDate = new Date();
+    return currentDate.getDate() + "." 
+    + (currentDate.getMonth() + 1) + "." 
+    + currentDate.getFullYear() + " " 
+    + currentDate.getHours() + ":" 
+    + currentDate.getMinutes() + ":" 
+    + currentDate.getSeconds();
+}
+
 function readyDiscord() {
-    console.log('Connected!');
+    console.log('\nConnected at ' + stringDate());
 }
 
 client.on('message', gotMessage);
 
 async function gotMessage(msg){// this function right here is async, which means it allows using await for functions that return promises
 
-        console.log(msg.content);
+        console.log(msg.author + " at " + stringDate() + " wrote: " +msg.content);
+        
         if(enableChatFilter)
             msg.content.replace(/[^a-zA-Z ]/g, "").split(" ").forEach(element => {
                 if(bannedWords.includes(element.toLowerCase()))
@@ -153,7 +161,7 @@ async function gotMessage(msg){// this function right here is async, which means
                             msg.reply("Only once lmao");
                         let burpFileIndex = Math.floor(Math.random() * numberOfBurpFiles) + 1;
                         multicastPlay(VoiceConnection, "./Music/Burp/Burp" + burpFileIndex.toString() + ".mp3", burpMulticast);
-                    }).catch(e => console.log(e))
+                    }).catch(e => console.error(e))
                 }
                 //TODO: make multicastPlay a separate function
             }
@@ -184,7 +192,7 @@ async function gotMessage(msg){// this function right here is async, which means
                             })
                             .catch(err => {
                                 msg.reply("Unable to ban the member!");
-                                console.log("uh oh: " + err);
+                                console.error(err);
                             });
                         }
                         else
@@ -233,7 +241,7 @@ async function gotMessage(msg){// this function right here is async, which means
 
             if(msg.content.toLowerCase().startsWith("!bankcreate")){
                 try{
-                    console.log("Trying to create bank account for " + msg.author.id);
+                    console.log("Creating bank account for " + msg.author.id);
                     const res = await service.createAccount(msg.author.id, 0);
                     msg.reply("Account created!");
                 }
@@ -241,7 +249,7 @@ async function gotMessage(msg){// this function right here is async, which means
                     if (e instanceof KeyError)
                         msg.reply(e.message);
                     else
-                        console.log(e.message);
+                        console.error(e);
                 }
             }
 
@@ -255,64 +263,12 @@ async function gotMessage(msg){// this function right here is async, which means
                     if (e instanceof KeyError)
                     msg.reply(e.message);
                 else
-                    console.log(e);
+                    console.error(e);
                 }
             }
 
-            // if(msg.content.toLowerCase().startsWith("!bankset")){
-            //     args = msg.content.split(" ");
-            //     try{
-            //         console.log("Setting the bank amount to " + args[1]);
-            //         const res = await service.updateAccount(msg.author.id, parseInt(args[1]));
-            //         msg.reply("Success!");
-            //     }
-            //     catch(e){
-            //         if (e instanceof KeyError)
-            //             msg.reply(e.message);
-            //         else
-            //             console.log(e);
-            //     }
-            // }
-
-            // if(msg.content.toLowerCase().startsWith("!test")){
-            //     console.log(repo);
-            // }
-            
-            // if(msg.content.toLowerCase().startsWith("!bankadd")){
-            //     args = msg.content.split(" ");
-            //     try{
-            //         console.log("Adding " + args[1] + " to the bank account of " + msg.author.id);
-            //         service.addToAccount(msg.author.id, parseInt(args[1]));
-            //         msg.reply("Success!");
-            //     }
-            //     catch(e){
-            //         if (e instanceof KeyError)
-            //             msg.reply(e.message);
-            //         else
-            //             console.log(e);
-            //     }
-            // }
-
-            // if(msg.content.toLowerCase().startsWith("!bankdelete")){
-            //     try{
-            //         console.log("Trying to delete bank account for " + msg.author.id);
-            //         const res = service.deleteAccount(msg.author.id);
-            //         if(res)
-            //             msg.reply("Account deleted!");
-            //         else
-            //             msg.reply("Something went wrong!");
-            //     }
-            //     catch(e){
-            //         if (e instanceof KeyError)
-            //             msg.reply(e.message);
-            //         else
-            //             console.log(e.message);
-            //     }
-            // }
-
             if(msg.content.toLowerCase().startsWith("!bankgift")){
                 args = msg.content.split(" ");
-                console.log(args[2]);
                 service.gift(msg.author.id, msg.mentions.users.first().id, args[2])
                 .catch(e => {
                     if(e instanceof ServiceError)
@@ -320,14 +276,12 @@ async function gotMessage(msg){// this function right here is async, which means
                     else if(e instanceof KeyError)
                         msg.reply(e.message);
                     else
-                        console.log(e.message);
+                        console.error(e.message);
                     });
                 }
 
             if(msg.content.toLowerCase().startsWith("!tip")){
                 args = msg.content.replace(/\s+/g, ' ').trim().split(" ");
-                console.log(args);
-                console.log(msg.mentions.users.first());
                 if(args.length != 2)
                     msg.reply("Command usage: !tip @user");
                 else{
@@ -342,7 +296,7 @@ async function gotMessage(msg){// this function right here is async, which means
                         else if(e instanceof KeyError)
                             msg.reply(e.message);
                         else
-                            console.log(e.message);
+                            console.error(e.message);
                     })
                 }
             }

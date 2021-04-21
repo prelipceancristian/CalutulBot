@@ -61,3 +61,55 @@
 //         autoReply += ccounter++ +  ". **!" + miscMusicTitles[i] + "**\n";
 //     }
 // });
+
+
+            // if(msg.content.toLowerCase().startsWith("!bankset")){
+            //     args = msg.content.split(" ");
+            //     try{
+            //         console.log("Setting the bank amount to " + args[1]);
+            //         const res = await service.updateAccount(msg.author.id, parseInt(args[1]));
+            //         msg.reply("Success!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e);
+            //     }
+            // }
+
+            // if(msg.content.toLowerCase().startsWith("!test")){
+            //     console.log(repo);
+            // }
+            
+            // if(msg.content.toLowerCase().startsWith("!bankadd")){
+            //     args = msg.content.split(" ");
+            //     try{
+            //         console.log("Adding " + args[1] + " to the bank account of " + msg.author.id);
+            //         service.addToAccount(msg.author.id, parseInt(args[1]));
+            //         msg.reply("Success!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e);
+            //     }
+            // }
+
+            // if(msg.content.toLowerCase().startsWith("!bankdelete")){
+            //     try{
+            //         console.log("Trying to delete bank account for " + msg.author.id);
+            //         const res = service.deleteAccount(msg.author.id);
+            //         if(res)
+            //             msg.reply("Account deleted!");
+            //         else
+            //             msg.reply("Something went wrong!");
+            //     }
+            //     catch(e){
+            //         if (e instanceof KeyError)
+            //             msg.reply(e.message);
+            //         else
+            //             console.log(e.message);
+            //     }
+            // }
