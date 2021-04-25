@@ -4,11 +4,11 @@ PATH1=$CURRENT_PATH/Music/Misc
 PATH2=$CURRENT_PATH/Music/Kanye
 cd $CURRENT_PATH/Music
 
-for elem in $(ls PATH1);do
+for elem in $(ls $PATH1);do
 	echo $elem >> outputMisc.txt
 done
 
-for elem in $(ls PATH2);do
+for elem in $(ls $PATH2);do
 	echo $elem >> outputKanye.txt
 done
 
