@@ -17,7 +17,7 @@ At the end of the file there is a list of useful links in which people with way 
 3. Edit the package.json config file and replace the "main" value from *"index.js"* to *"bot.js"*.
 4. Enter the working folder and select one of the following:
 	- runMeWin (for Windows, a batch file which updates the local data files on run)
-	- runMeLin (for Linux, a bash script which does the same thing)
+	- runMeLin (for Linux, a bash script which does the same thing, you might need to change permissions with "chmod u+x runMeLin.sh")
 5. ?
 6. Profit
 
