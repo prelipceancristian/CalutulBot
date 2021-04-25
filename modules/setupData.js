@@ -7,7 +7,7 @@ module.exports = {
             Input: -
             Output: an array of all songs written in the outputMisc.txt file
         */
-        fs.readFile('C:/Users/Cristi/Desktop/CalutulBot/Music/outputMisc.txt', 'utf8', function (err,data) {
+        fs.readFile('./Music/outputMisc.txt', 'utf8', function (err,data) {
             if (err) {
               return console.log(err);
             }
@@ -25,11 +25,11 @@ module.exports = {
         }); //FIXME:add comms
     },
 
-    loadHelpFile: () => fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/help.txt', 'utf8'),
-    loadRepliesFile: () => fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/replies.txt', 'utf8').split('\n'),
-    loadRareRepliesFile: () => fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/rareReplies.txt', 'utf8').split('\n'),
+    loadHelpFile: () => fs.readFileSync('./Dialogue/help.txt', 'utf8'),
+    loadRepliesFile: () => fs.readFileSync('./Dialogue/replies.txt', 'utf8').split('\n'),
+    loadRareRepliesFile: () => fs.readFileSync('./Dialogue/rareReplies.txt', 'utf8').split('\n'),
     loadPredefined: (predefinedCommandsList, predefinedPathList) => {
-        let data = fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Music/predefinedCommandsAndPaths.csv', 'utf8');
+        let data = fs.readFileSync('./Music/predefinedCommandsAndPaths.csv', 'utf8');
         args = data.split('\n');
         let whatev = args.pop();
         whatev = args.shift();
@@ -44,7 +44,7 @@ module.exports = {
         return [predefinedCommandsList, predefinedPathList];
     },
     loadOutputMisc: (miscMusicTitles, autoReply) => {
-        let temp = fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Music/outputMisc.txt', 'utf8');
+        let temp = fs.readFileSync('./Music/outputMisc.txt', 'utf8');
         miscMusicTitles = temp.split("\n");
         for(let i = 0; i < miscMusicTitles.length; i++){
             miscMusicTitles[i] = miscMusicTitles[i].replace('\r', '');
@@ -60,7 +60,7 @@ module.exports = {
         return [miscMusicTitles, autoReply];
     },
     loadKanyeMusic: () => {
-        let temp = fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Music/outputKanye.txt', 'utf8').split('\n');
+        let temp = fs.readFileSync('./Music/outputKanye.txt', 'utf8').split('\n');
         let whatev = temp.pop();
         for(let i = 0; i < temp.length; i++){
             temp[i] = temp[i].replace('\r', '');
@@ -71,7 +71,7 @@ module.exports = {
     },
 
     loadBannedWords: () => {
-        let temp = fs.readFileSync('C:/Users/Cristi/Desktop/CalutulBot/Dialogue/bannedWords.txt', 'utf8').split('\n');
+        let temp = fs.readFileSync('./Dialogue/bannedWords.txt', 'utf8').split('\n');
         for(let i = 0; i < temp.length; i++){
             temp[i] = temp[i].replace('\r', '');
         }
