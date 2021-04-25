@@ -1,1 +1,13 @@
-^C^C^C^C^C^C^C^C
+^C^C^C^C^C^C^C^C(node:23912) UnhandledPromiseRejectionWarning: Error [TOKEN_INVALID]: An invalid token was provided.
+    at Client.login (/home/cristi/Desktop/CalutulBot/node_modules/discord.js/src/client/Client.js:206:52)
+    at Object.<anonymous> (/home/cristi/Desktop/CalutulBot/bot.js:64:8)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+(node:23912) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:23912) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.

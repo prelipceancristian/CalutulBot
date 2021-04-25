@@ -2,7 +2,10 @@
 CURRENT_PATH=`pwd`
 PATH1=$CURRENT_PATH/Music/Misc
 PATH2=$CURRENT_PATH/Music/Kanye
+
 cd $CURRENT_PATH/Music
+echo > outputMisc.txt
+echo > outputKanye.txt
 
 for elem in $(ls $PATH1);do
 	echo $elem >> outputMisc.txt
