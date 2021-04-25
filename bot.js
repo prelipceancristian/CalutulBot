@@ -82,12 +82,11 @@ client.on('message', gotMessage);
 
 async function gotMessage(msg){// this function right here is async, which means it allows using await for functions that return promises
 
-        console.log(msg.author + " at " + stringDate() + " wrote: " +msg.content);
-        
+        console.log(msg.author.username + " at " + stringDate() + " wrote: " + msg.content);
+
         if(enableChatFilter)
             msg.content.replace(/[^a-zA-Z ]/g, "").split(" ").forEach(element => {
                 if(bannedWords.includes(element.toLowerCase()))
-                    //msg.channel.send("BANNED WORD DETECTED");
                     msg.delete({ timeout: 0, reason: "User used a banned word: " + element})
                     .then(msg => {
                         console.log(`Deleted message from ${msg.author.username}`);
