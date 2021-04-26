@@ -108,7 +108,7 @@ async function gotMessage(msg){// this function right here is async, which means
                     let index = Math.floor(Math.random() * ultraRareReplies.length);
                     msg.reply('**' + ultraRareReplies[index] + '**');
                 }
-                else if (chance <= 12){
+                else if (chance <= 32){
                     let index = Math.floor(Math.random() * replies.length);
                     msg.reply(replies[index]);
                 }
