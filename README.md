@@ -23,14 +23,13 @@ At the end of the file there is a list of useful links in which people with way 
 
 
 Possbile errors and useful links:
-	- *Installing node*: https://nodejs.org/en/download/package-manager/
-	- *Installing discord.js*: https://discord.js.org/#/docs/main/stable/general/welcome
-	- *Setting up discord bots with your discord dev account*: https://discord.com/developers/applications
-	- *Installing ffmpeg*: https://ffmpeg.org/download.html
-	- MISSING .TXT FILES
-		./Dialogue/bannedWords.txt
-		./Dialogue/help.txt
-		./Dialogue/rareReplies.txt
-		./Dialogue/replies
-		./Music
-
+* *Installing node*: https://nodejs.org/en/download/package-manager/
+* *Installing discord.js*: https://discord.js.org/#/docs/main/stable/general/welcome
+* *Setting up discord bots with your discord dev account*: https://discord.com/developers/applications
+* *Installing ffmpeg*: https://ffmpeg.org/download.html
+* MISSING .TXT AND .MP3 FILES
+>./Dialogue/bannedWords.txt
+>./Dialogue/help.txt
+>./Dialogue/rareReplies.txt
+>./Dialogue/replies
+>./Music
