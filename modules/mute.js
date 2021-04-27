@@ -1,4 +1,13 @@
+/**
+ * A module used for muting and unmuting users
+ * @module mute
+ */
+
 module.exports = {
+    /**
+     * The function recieves a message and mutes the user mentioned in the message content
+     * @param {Message} msg - the message that issued the mute command 
+     */
     muteUser: function(msg){
         const target = msg.mentions.users.first();
         if (target){
@@ -13,7 +22,10 @@ module.exports = {
         else
             return msg.reply("User can't be found!");
     },
-
+    /**
+     * The function recieves a message and unmutes the user mentioned in the message content
+     * @param {Message} msg - the message that issued the unmute command 
+     */
     unmuteUser: function(msg){
         const target = msg.mentions.users.first();
         if (target){

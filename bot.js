@@ -22,7 +22,6 @@ let burpTimer = new Date(2020, 1, 1, 0, 0, 0);
 const numberOfBurpFiles = 3;
 let enableChatFilter = false;
 let bannedWords = sD.loadBannedWords();
-//console.log(bannedWords);
 const adminName = "monkey king";
 let isLoaded = false;
 let miscMusicTitles = [];
@@ -30,27 +29,27 @@ let kanyeMusicTitles = [];
 let autoReply = "Automatically generated commands:\n";
 let alwaysOn = false;
 
-const BankAccount = require("./modules/CalutulBank/Domain/BankAccount");
-const Repo = require("./modules/CalutulBank/Repository/Repo");
 const Service = require("./modules/CalutulBank/Business/Service");
 const KeyError = require("./modules/CalutulBank/Errors/KeyError");
 const RepoFile = require("./modules/CalutulBank/Repository/RepoFile");
-const { indexOf } = require('ffmpeg-static');
 const ServiceError = require('./modules/CalutulBank/Errors/ServiceError');
 let repo = new RepoFile("./bank.json")
-//let repo = new Repo();
 let service = new Service(repo);
 
 
 [predefinedCommandsList, predefinedPathList] = sD.loadPredefined(predefinedCommandsList, predefinedPathList);
 [miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply);
 kanyeMusicTitles = sD.loadKanyeMusic();
-//console.log(kanyeMusicTitles);
 let helpText = sD.loadHelpFile(); //    WORKS!!!!
 let replies = sD.loadRepliesFile();
 let ultraRareReplies = sD.loadRareRepliesFile();
-// maybe create one big function that does all the loading?
 
+/**
+ * The function allows for playing a soundbite multiple times
+ * @param {VoiceConnection} VoiceConnection 
+ * @param {string} soundPath 
+ * @param {number} multicastFactor 
+ */
 function multicastPlay(VoiceConnection, soundPath, multicastFactor){
     if(multicastFactor != 0)
             {
@@ -64,7 +63,16 @@ function multicastPlay(VoiceConnection, soundPath, multicastFactor){
 client.login(process.env.BOTTOKEN);
 client.on('ready', readyDiscord);
 
+function readyDiscord() {
+    console.log('\nConnected at ' + stringDate());
+}
+
+/**
+ * Calculates the current date and returns it as a string.
+ * @returns {string} currentDate - The current date in the dd.mm.yyyy hh:mm:ss format
+*/
 function stringDate(){
+
     var currentDate = new Date();
     return currentDate.getDate() + "." 
     + (currentDate.getMonth() + 1) + "." 
@@ -74,12 +82,12 @@ function stringDate(){
     + currentDate.getSeconds();
 }
 
-function readyDiscord() {
-    console.log('\nConnected at ' + stringDate());
-}
-
 client.on('message', gotMessage);
-
+/**
+ * The function takes a discord Message and reacts accordingly(activates commands or activates certain text triggers)
+ * @param {Message} msg 
+ * @returns 
+ */
 async function gotMessage(msg){// this function right here is async, which means it allows using await for functions that return promises
 
         console.log(msg.author.username + " at " + stringDate() + " wrote: " + msg.content);
@@ -315,5 +323,3 @@ async function gotMessage(msg){// this function right here is async, which means
 
     }
 }
-
-//client.listen(process.env.PORT || 5000);

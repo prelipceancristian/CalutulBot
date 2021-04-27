@@ -1,18 +1,17 @@
 var myEmojis = require('../myEmojis.json');
 
 module.exports = {
+    /**
+     * The function recieves a message and creates a string based on the message content that contains emojis that fit
+     * @param {Message} message - the message that issued the command, along with the given text to emojify
+     * @returns {string} res - the modified message content
+     */
     emojify: function(message){
         res = ""
         args = message.content.split(' ');
         args.splice(0,1);
         args.forEach(element => {
             res += element + " ";
-            //let supposedEmoji = myEmojis[element];
-            // myEmojis.forEach(element => {
-            //     console.log(element.keywords);
-            // });
-            // if(typeof supposedEmoji !== "undefined")
-            //     res += supposedEmoji.char + " ";
             if(typeof myEmojis[element] !== "undefined")
                 res += myEmojis[element].char + " ";
             else

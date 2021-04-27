@@ -1,10 +1,11 @@
 
 
 module.exports = {
+    /**
+     * The function calculates a "multicast" value between 1 and 4 and returns it.
+     * @returns {number} burpMulticast - the random value between 1 and 4
+     */
     calculateMulticast: function(){
-            /**
-             * The function calculates a "multicast" value between 1 and 4 and returns it.
-             */
             let burpMulticast = Math.floor(Math.random() * 100);
             if(burpMulticast < 15)
                 burpMulticast = 4;// 15%
@@ -16,7 +17,13 @@ module.exports = {
                 burpMulticast = 1;// 25%
             return burpMulticast;
     },
-
+        /**
+         * The function allows for playing a soundbite in a succession
+         * @param {VoiceConnection} VoiceConnection 
+         * @param {string} soundPath 
+         * @param {number} multicastFactor 
+         * @returns {Date} -  the date at which the action occured
+         */
     multicastPlay: function(VoiceConnection, soundPath, multicastFactor){
         // if(multicastFactor != 0)
         //         {
