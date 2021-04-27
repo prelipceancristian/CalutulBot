@@ -7,7 +7,7 @@ At the end of the file there is a list of useful links in which people with way 
 **Prerequisites:**
 1. Node.js v14.15.3, check installation by writing "node --version" in the command prompt / terminal
 2. Discord.js (*"npm install discord.js"* once you have installed node.js)
-3. Generating your own list .txt and .mp3 files
+3. Generating your own list .txt and .mp3 files (I chose not to include my own as they contain personalised information about me and my friend. A list of all missing .txt files will be down below)
 4. Obtain your own BOTTOKEN and TENORKEY and add them to a local .env file
 5. Ffmpeg
 
@@ -22,8 +22,15 @@ At the end of the file there is a list of useful links in which people with way 
 6. Profit
 
 
-*Installing node*: https://nodejs.org/en/download/package-manager/
-*Installing discord.js*: https://discord.js.org/#/docs/main/stable/general/welcome
-*Setting up discord bots with your discord dev account*: https://discord.com/developers/applications
-*Installing ffmpeg*: https://ffmpeg.org/download.html
+Possbile errors and useful links:
+	- *Installing node*: https://nodejs.org/en/download/package-manager/
+	- *Installing discord.js*: https://discord.js.org/#/docs/main/stable/general/welcome
+	- *Setting up discord bots with your discord dev account*: https://discord.com/developers/applications
+	- *Installing ffmpeg*: https://ffmpeg.org/download.html
+	- MISSING .TXT FILES
+		./Dialogue/bannedWords.txt
+		./Dialogue/help.txt
+		./Dialogue/rareReplies.txt
+		./Dialogue/replies
+		./Music
 
