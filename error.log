@@ -11,4 +11,102 @@
     at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
 (node:23912) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
 (node:23912) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-^C^C^C
+^C^C^CError: file not found. Make sure the bannedWords.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the help.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the replies.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the rareReplies.txt file is in the correct location in the ./Dialogue folder!
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:5464) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:116:77)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 4)
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 5)
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 6)
+(node:5464) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'length' of undefined
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:120:68)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(node:5464) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 7)
+^CError: file not found. Make sure the bannedWords.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the help.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the replies.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the rareReplies.txt file is in the correct location in the ./Dialogue folder!
+^CError: file not found. Make sure the bannedWords.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the help.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the replies.txt file is in the correct location in the ./Dialogue folder!
+Error: file not found. Make sure the rareReplies.txt file is in the correct location in the ./Dialogue folder!
+^C
