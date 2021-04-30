@@ -16,7 +16,7 @@ class Inventory{
     create(idUser){
         if(this.transactions.has(idUser))
             throw new KeyError("There already is a shop account under this id!");
-        this.transactions.set(idUser, {});
+        this.transactions.set(idUser, []);
     }
 
     /**
@@ -56,7 +56,7 @@ class Inventory{
     hasItem(idUser, idItem){
         if(!(this.transactions.has(idUser)))
             throw new KeyError("There is no shop account under this id!");
-        return this.transactions.get(idUser).indexOf(idItem);
+        return this.transactions.get(idUser).indexOf(idItem) != -1;
     }
 
     /**
@@ -64,14 +64,15 @@ class Inventory{
      * @param {number} idUser 
      * @param {Array|number} newTransactionArray 
      */
+    /*
     update(idUser, newTransactionArray){
         if(!(this.transactions.has(idUser)))
             throw new KeyError("There is no shop account under this id!");
         this.transactions.set(idUser, newTransactionArray);
-    }
+    */
 
     /**
-     * The function completly deletes an user's shop account
+     * The function completely deletes an user's shop account
      * @param {number} idUser 
      * @returns {bool} the value of the delete() function
      */

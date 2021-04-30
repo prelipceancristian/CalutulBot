@@ -4,7 +4,7 @@
   "description": "\"# CristiBot\"",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node bot.js"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.7",
     "fluent-ffmpeg": "^2.1.2",
+    "mocha": "^8.3.2",
     "node-fetch": "^2.6.1",
     "ytdl-core": "^4.4.3"
   },

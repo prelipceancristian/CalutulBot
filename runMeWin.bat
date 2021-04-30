@@ -9,6 +9,6 @@ break>outputKanye.txt
 FOR /F "tokens=*" %%G IN ('dir /b %temp2%') DO echo %%G >> outputKanye.txt
 cd %CURRENT_PATH%
 echo on
-node bot.js >> logs.log 2>> error.log
-rem node bot.js
+rem node bot.js >> logs.log 2>> error.log
+node bot.js
 pause 10

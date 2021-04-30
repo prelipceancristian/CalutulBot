@@ -11,6 +11,7 @@ At the end of the file there is a list of useful links in which people with way 
 3. Generating your own .txt and .mp3 files (I chose not to include my own as they contain personalised information about me and my friends. A list of all missing .txt files will be down below)
 4. Obtain your own BOTTOKEN ~and TENORKEY~ and add them to a local .env file
 5. Ffmpeg
+6. Mochajs (if you're into running tests, don't bother otherwise)
 
 *How to setup:*
 1. Clone the github project at your desired location.
