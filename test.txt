@@ -113,3 +113,17 @@
             //             console.log(e.message);
             //     }
             // }
+
+
+        //TODO: wtf is this why is it acting up this badly
+        //const data = await fs.readFile(this.filePath);
+        //this.transactions = this.objToStrMap(JSON.parse(data));// i mean what is this shit
+        await this.readFromFile();
+        if(this.transactions.has(id)){
+            console.log('here');
+            throw new KeyError('There already is an user with this id!');
+        }
+        this.transactions.set(id, []);
+        await this.writeToFile();
+        //const code = await fs.writeFile(this.filePath, JSON.stringify(this.strMapToObj(this.transactions)));
+        //return code;

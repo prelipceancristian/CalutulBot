@@ -27,7 +27,6 @@ class RepoFile extends Repo{
 
     async create(bankAccount){
         const data = await fs.readFile(this.filePath);
-        //console.log(data.toString());
         this.accs = this.objToStrMap(JSON.parse(data));
         if(this.accs.has(bankAccount.UId)){
             //console.log("Got the error in the repo");

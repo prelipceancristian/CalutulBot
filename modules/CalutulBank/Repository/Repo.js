@@ -23,7 +23,7 @@ class Repo{
     }
 
     update(bankAccount){
-        if(!(this.accs.get(bankAccount.UId))){
+        if(!(this.accs.has(bankAccount.UId))){
             console.log(this.accs);
             console.log(bankAccount.UId);
             //console.log(this.accs["ooga"]);
