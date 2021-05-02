@@ -68,6 +68,10 @@ class FileInventory extends Inventory{
         await this.writeToFile();
     }
 
+    async hasAcc(idUser){
+        await this.readFromFile();
+        return super.hasAcc(idUser);
+    }
 }
 
 module.exports = FileInventory;

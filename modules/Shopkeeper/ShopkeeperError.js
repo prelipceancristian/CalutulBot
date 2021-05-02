@@ -1,7 +1,7 @@
 class ShopkeeperError extends Error{
     constructor(message) {
         super(message);
-        this.name = 'ShopkeepError';
+        this.name = 'ShopkeeperError';
     }
 }
 

@@ -16,14 +16,14 @@ class TransactionLogger{
         + currentDate.getSeconds();
     }
 
-    async logToFile(userId, item, amount, isPaid){
+    async logToFile(userId, item, isPaid){
         var temp = ""
         if(isPaid)
             temp = " bought ";
         else
             temp = " sold ";
-        var s = "At " + this.stringDate() +  ", user " + userId.toString() + temp + "item " + item.toString() + " for " + amount.toString();
-        const code = await fs.writeFile(this.filePath, s);
+        var s = "At " + this.stringDate() +  ", the user with the id " + userId.toString() + temp + "item " + item.name + " (id: " + item.id + ") for " + item.price + " CalutulCoins\n";
+        await fs.appendFile(this.filePath, s);
     }
 }
 

@@ -6,6 +6,7 @@ class ShopRepo {
     }
 
     create(shoppable){
+        //console.log(shoppable);
         if(this.items.has(shoppable.id)){
             throw new KeyError("There already exists an item with this id!");
         }

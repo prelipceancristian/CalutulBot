@@ -26,7 +26,8 @@ class FileShopRepo extends ShopRepo{
 
     async readFromFile(){
         const data = await fs.readFile(this.filePath);
-        this.transactions = this.objToStrMap(JSON.parse(data));
+        this.items = this.objToStrMap(JSON.parse(data));
+        //console.log(this.items);
     }
 
     async writeToFile(){

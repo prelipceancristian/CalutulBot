@@ -24,15 +24,17 @@ class Shopkeeper {
     async buy(userId, itemId){
         const userBankAccount = await this.bankRepo.read(userId);
         const boughtItem = await this.shopRepo.read(itemId);
+        if(!(await this.inventory.hasAcc(userId)))
+            await this.inventory.create(userId);
+        if(await this.inventory.hasItem(userId, itemId))
+            throw new ShopkeeperError('You already have this item!');
         if(userBankAccount.amount < boughtItem.price)
             throw new ShopkeeperError('You do not have enough money for this item!');
         const newUserBankAccount = new BankAccount(userId, userBankAccount.amount - boughtItem.price);
-        if(!(await this.inventory.hasAcc(userId)))
-            await this.inventory.create(userId);
         await this.inventory.add(userId, itemId);
         await this.bankRepo.update(newUserBankAccount);
-        //TODO: buying same item twice
-        //TODO: transaction logger
+        //console.log(await this.shopRepo.read(itemId));
+        await this.transactionLogger.logToFile(userId, await this.shopRepo.read(itemId), true);
     }
 }
 

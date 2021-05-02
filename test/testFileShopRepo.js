@@ -5,10 +5,10 @@ const FileShopRepo = require('../modules/ShopRepo/FileShopRepo')
 const Shoppable = require('../modules/Shop/Shoppable');
 const SoundBite = require('../modules/Shop/SoundBite');
 
-const sh1 = new Shoppable(1, "MyShoppable1", "A shoppable object created for testing purposes", "Cathegory 1", 100);
-const sh2 = new Shoppable(2, "MyShoppable2", "A shoppable object created for testing purposes", "Cathegory 1", 2000);
-const sb1 = new SoundBite(3, "MySoundBite1", "A soundbite object created for testing purposes", "Cathegory 2", 1000, "path1",);
-const sb2 = new SoundBite(4, "MySoundBite2", "A soundbite object created for testing purposes", "Cathegory 2", 10, "path2");
+const sh1 = new Shoppable("1", "MyShoppable1", "A shoppable object created for testing purposes", "Cathegory 1", 100);
+const sh2 = new Shoppable("2", "MyShoppable2", "A shoppable object created for testing purposes", "Cathegory 1", 2000);
+const sb1 = new SoundBite("3", "MySoundBite1", "A soundbite object created for testing purposes", "Cathegory 2", 1000, "path1",);
+const sb2 = new SoundBite("4", "MySoundBite2", "A soundbite object created for testing purposes", "Cathegory 2", 10, "path2");
 
 
 describe('File Shop Repo', function() {
@@ -27,7 +27,7 @@ describe('File Shop Repo', function() {
             await fileShRepo.create(sh1);
             await fileShRepo.create(sb1);
             try {
-                await fileShRepo.create(sb1);
+                await fileShRepo.create(sb1);//aici
                 assert.fail();
             } catch (error) {
                 if(error.name != 'KeyError')
@@ -41,7 +41,13 @@ describe('File Shop Repo', function() {
             await fs.writeFile(testFileName, "{}", () => {});
             await fileShRepo.create(sh1);
             var res = await fileShRepo.read(sh1.id);
-            assert.deepStrictEqual(res, sh1);
+            console.log(res);
+            console.log(sh1);
+            assert.strictEqual(res.id, sh1.id);
+            assert.strictEqual(res.name, sh1.name);
+            assert.strictEqual(res.description, sh1.description);
+            assert.strictEqual(res.cathegory, sh1.cathegory);
+            assert.strictEqual(res.price, sh1.price);
         });
         it('Read inexistent user', async function(){
             var fileShRepo = new FileShopRepo(testFileName);
