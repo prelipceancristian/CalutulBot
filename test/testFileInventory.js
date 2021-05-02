@@ -1,6 +1,6 @@
 var assert = require('assert');
 const fs = require('fs').promises;
-const testFileName = 'test/testFile.json';
+const testFileName = './test/AuxFiles/testFile.json';
 const FileInventory = require('../modules/Inventory/FileInventory')
 
 describe('File Inventory', function() {

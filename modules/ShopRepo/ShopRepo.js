@@ -31,6 +31,10 @@ class ShopRepo {
             throw new KeyError("There is no item under this id!");
         return this.items.delete(id);
     }
+
+    getAll(){
+        return this.items.values();
+    }
 }
 
 module.exports = ShopRepo;

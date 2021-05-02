@@ -30,7 +30,7 @@ class FileShopRepo extends ShopRepo{
     }
 
     async writeToFile(){
-        const code = await fs.writeFile(this.filePath, JSON.stringify(this.strMapToObj(this.transactions)));
+        const code = await fs.writeFile(this.filePath, JSON.stringify(this.strMapToObj(this.items)));
     }
 
     async create(shoppable){

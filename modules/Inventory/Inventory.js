@@ -98,6 +98,14 @@ class Inventory{
         const index = currentItems.indexOf(idItem);
         currentItems.splice(index, 1);
     }
+
+    /**
+     * The function checks if the user has an account
+     * @param {number} idUser 
+     */
+    hasAcc(idUser){
+        return this.transactions.has(idUser);
+    }
 }
 
 module.exports = Inventory;

@@ -29,12 +29,10 @@ class RepoFile extends Repo{
         const data = await fs.readFile(this.filePath);
         this.accs = this.objToStrMap(JSON.parse(data));
         if(this.accs.has(bankAccount.UId)){
-            //console.log("Got the error in the repo");
             throw new KeyError("There already exists an account with this user id!");
         }
         this.accs.set(bankAccount.UId, bankAccount);
         const code = await fs.writeFile(this.filePath, JSON.stringify(this.strMapToObj(this.accs)));
-        //console.log(code);
     }
 
     async read(UId){
