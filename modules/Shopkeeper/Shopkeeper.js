@@ -17,9 +17,16 @@ class Shopkeeper {
         this.inventory = _inventory;
     }
 
-    availableItems(){
-        return this.shopRepo.getAll();
+    async availableItems(){
+        return await this.shopRepo.getAll();
     }
+
+    async filterItemsByCathegory(givenCathegory){
+        var res = await this.shopRepo.getAll();
+        return res.filter(item => item.cathegory == givenCathegory);
+    }
+
+    
 
     /**
      * The function handles the buying operation

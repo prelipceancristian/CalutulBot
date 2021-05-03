@@ -12,6 +12,8 @@ const lat = require('./modules/latin');
 const em = require('./modules/emojify');
 const rep = require('./modules/replyLongText');
 const tp = require('./modules/tip');
+const ItemEmbed = require('./modules/UI/ItemEmbed');
+const SoundBite = require('./modules/Shop/SoundBite');
 
 let predefinedCommandsList = [];
 let predefinedPathList = [];
@@ -319,6 +321,14 @@ async function gotMessage(msg){// this function right here is async, which means
                 if(msg.guild.me.voice.channel){
                     msg.member.voice.channel.join().then(VoiceConnection => VoiceConnection.disconnect());
                 }
+            }
+
+            if(msg.content.toLowerCase().startsWith("!test")){
+                const asd = new SoundBite("1", "MyTitle", "Some bogus but long description", "Premium SoundBites", 1000, "");
+                const itemEmbed = new ItemEmbed();
+                console.log(asd);
+                console.log(itemEmbed.createEmbed(asd));
+                msg.reply({embed: itemEmbed.createEmbed(asd)});
             }
 
     }

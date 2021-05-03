@@ -143,6 +143,6 @@ describe('Shopkeeper', function(){
             await shopkeeper.buy(bk1.UId, sb2.id);
             await shopkeeper.sell(bk1.UId, sb2.id);
 
-        })
+        });
     })
 });

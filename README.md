@@ -36,3 +36,4 @@ Possbile errors and useful links:
     *./Dialogue/rareReplies.txt
     *./Dialogue/replies
     *./Music
+* **NOTE** As of 03.05.2021, node.js has the v10.19.0 as the latest stable version on linux. This means that due to the implementation of the Discord embeds, it is not possible to send them while hosting on a linux machine.
