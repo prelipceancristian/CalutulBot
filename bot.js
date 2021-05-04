@@ -324,11 +324,9 @@ async function gotMessage(msg){// this function right here is async, which means
             }
 
             if(msg.content.toLowerCase().startsWith("!test")){
-                const asd = new SoundBite("1", "MyTitle", "Some bogus but long description", "Premium SoundBites", 1000, "");
+                const asd = new SoundBite("1", "The best song", "Some bogus but long description. " + "This will allow the user to make smarter decisions and create an idea and now im out of ideas but "+ "i need to make it longer that s what she said haha", "Premium SoundBites", 1000, "");
                 const itemEmbed = new ItemEmbed();
-                console.log(asd);
-                console.log(itemEmbed.createEmbed(asd));
-                msg.reply({embed: itemEmbed.createEmbed(asd)});
+                msg.reply({files: ["./Images/shop.png", "./Images/soundbite.png"], embed: itemEmbed.createEmbed(asd)});
             }
 
     }
