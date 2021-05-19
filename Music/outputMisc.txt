@@ -1,6 +1,9 @@
+answers.mp3 
+beautiful.mp3 
 boom.mp3 
 cf.mp3 
 cs.mp3 
+fr.mp3 
 gangsta.mp3 
 gossip.mp3 
 heheboi.mp3 

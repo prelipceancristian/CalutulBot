@@ -182,3 +182,18 @@ Error: file not found. Make sure the rareReplies.txt file is in the correct loca
     at Receiver.receiverOnMessage (/home/cristi/Desktop/CalutulBot/node_modules/ws/lib/websocket.js:835:20)
 (node:31552) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
 (node:31552) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+^C^C^C(node:19840) UnhandledPromiseRejectionWarning: TypeError: msg.content.toLowerCase.startsWith is not a function
+    at Client.gotMessage (C:\Users\Cristi\Desktop\CalutulBot\bot.js:335:40)
+    at Client.emit (events.js:315:20)
+    at MessageCreateAction.handle (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\actions\MessageCreate.js:31:14)
+    at Object.module.exports [as MESSAGE_CREATE] (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+    at WebSocketManager.handlePacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketManager.js:384:31)
+    at WebSocketShard.onPacket (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:444:22)
+    at WebSocketShard.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\discord.js\src\client\websocket\WebSocketShard.js:301:10)
+    at WebSocket.onMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\event-target.js:132:16)
+    at WebSocket.emit (events.js:315:20)
+    at Receiver.receiverOnMessage (C:\Users\Cristi\Desktop\CalutulBot\node_modules\ws\lib\websocket.js:835:20)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19840) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:19840) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+^C

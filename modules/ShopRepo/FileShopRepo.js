@@ -57,6 +57,11 @@ class FileShopRepo extends ShopRepo{
         await this.writeToFile();
     }
 
+    async getAll(){
+        await this.readFromFile();
+        return super.getAll();
+    }
+
 }
 
 module.exports = FileShopRepo;

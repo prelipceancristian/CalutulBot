@@ -11,17 +11,17 @@ class ItemEmbed {
         const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(item.name)
-        
         .setAuthor("Shop items - Id " + item.id)
         .setDescription(item.description)
-        .setThumbnail('attachment://shop.png')
-        .addField( "Cathegory", item.cathegory, true)
+        .setThumbnail('attachment://soundbite3.png')
+        .addField( "Category", item.cathegory, true)
         .addField( "Price", item.price.toString() + " CalutulCoins", true)
-        .setImage('attachment://soundbite.png')
+        .addField( "Command", "!buy " + item.id)
+        //.setImage('attachment://soundbite2.png')
         .setTimestamp()
-        .setFooter("Protip: Click the item name for a preview!", 'https://i.imgur.com/wSTFkRM.png')
+        .setFooter("Protip: Click the item name for a preview!")
         .setURL('https://discord.js.org/');
-        return exampleEmbed
+        return exampleEmbed;
     }
 }
 

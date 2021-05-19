@@ -35,8 +35,18 @@ const Service = require("./modules/CalutulBank/Business/Service");
 const KeyError = require("./modules/CalutulBank/Errors/KeyError");
 const RepoFile = require("./modules/CalutulBank/Repository/RepoFile");
 const ServiceError = require('./modules/CalutulBank/Errors/ServiceError');
+const Shopkeeper = require('./modules/Shopkeeper/Shopkeeper');
+const FileShopRepo = require('./modules/ShopRepo/FileShopRepo');
+const TransactionLogger = require('./modules/TransactionLogger/TransactionLogger');
+const Inventory = require('./modules/Inventory/Inventory');
+const FileInventory = require('./modules/Inventory/FileInventory');
+
+let transactionLogger = new TransactionLogger("./logs.log");
 let repo = new RepoFile("./bank.json")
 let service = new Service(repo);
+let shoprepo = new FileShopRepo('./shopItems.json');
+let inventory = new FileInventory('./inventory.json');
+let shopkeeper = new Shopkeeper(repo, shoprepo, transactionLogger, inventory);
 
 
 [predefinedCommandsList, predefinedPathList] = sD.loadPredefined(predefinedCommandsList, predefinedPathList);
@@ -323,10 +333,27 @@ async function gotMessage(msg){// this function right here is async, which means
                 }
             }
 
-            if(msg.content.toLowerCase().startsWith("!test")){
-                const asd = new SoundBite("1", "The best song", "Some bogus but long description. " + "This will allow the user to make smarter decisions and create an idea and now im out of ideas but "+ "i need to make it longer that s what she said haha", "Premium SoundBites", 1000, "");
+            if(msg.content.toLowerCase().startsWith("!shoplist")){
                 const itemEmbed = new ItemEmbed();
-                msg.reply({files: ["./Images/shop.png", "./Images/soundbite.png"], embed: itemEmbed.createEmbed(asd)});
+                Array.from(await shoprepo.getAll()).forEach(element => {
+                    msg.channel.send({embed: itemEmbed.createEmbed(element)});
+                })
+            }
+
+            if(msg.content.toLowerCase().startsWith("!buy")){
+                const args = msg.content.split(" ");
+                try{
+                    await shopkeeper.buy(msg.author.id, args[1]);
+                    msg.reply("Success!"); 
+                }
+                catch(err){
+                    if(err.name == 'KeyError' || err.name == 'ShopkeeperError')
+                        msg.reply("Error: " + err.message);
+                    else{
+                        msg.reply("Unhandled error, sorry for the inconvenience!");
+                        console.error(err);
+                    }
+                }
             }
 
     }
