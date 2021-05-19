@@ -356,5 +356,33 @@ async function gotMessage(msg){// this function right here is async, which means
                 }
             }
 
+            if(msg.content.toLowerCase().startsWith("!inventory")){
+                const itemIds = await inventory.read(msg.author.id);
+                let ans = "\n";
+                for(let index = 0; index < itemIds.length; index++){
+                    const item = await shoprepo.read(itemIds[index]);
+                    ans += `${itemIds[index]} - ${item.name}\n`;
+                }
+                if(ans === '\n')
+                    ans = "No items in your inventory!";
+                msg.reply(ans);
+            }
+
+            if(msg.content.toLowerCase().startsWith("!sell")){
+                const args = msg.content.split(" ");
+                try{
+                    await shopkeeper.sell(msg.author.id, args[1]);
+                    msg.reply("Success!"); 
+                }
+                catch(err){
+                    if(err.name == 'KeyError' || err.name == 'ShopkeeperError')
+                        msg.reply("Error: " + err.message);
+                    else{
+                        msg.reply("Unhandled error, sorry for the inconvenience!");
+                        console.error(err);
+                    }
+                }
+            }
+
     }
 }
