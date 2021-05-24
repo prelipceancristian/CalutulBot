@@ -7,6 +7,7 @@ const em = require('./modules/emojify')
 const rep = require('./modules/replyLongText')
 const tp = require('./modules/tip')
 const kick = require('./modules/kick')
+const burp = require('./modules/burp')
 
 const Utils = require('./Utils')
 
@@ -34,22 +35,23 @@ kanyeMusicTitles = sD.loadKanyeMusic()
 let helpText = sD.loadHelpFile()
 let replies = sD.loadRepliesFile()
 let ultraRareReplies = sD.loadRareRepliesFile()
+let numberOfBurpFiles = 3
 
-let predefinedCommandsList = [];
-let predefinedPathList = [];
+let predefinedCommandsList = []
+let predefinedPathList = []
 
-[predefinedCommandsList, predefinedPathList] = sD.loadPredefined(
+;[predefinedCommandsList, predefinedPathList] = sD.loadPredefined(
   predefinedCommandsList,
   predefinedPathList
 )
 
-let miscMusicTitles = [];
-let autoReply = 'Automatically generated commands:\n';
-const adminName = 'monkey king';
+let miscMusicTitles = []
+let autoReply = 'Automatically generated commands:\n'
+const adminName = 'monkey king'
 
-let bannedWords = sD.loadBannedWords();
+let bannedWords = sD.loadBannedWords()
 
-[miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply)
+;[miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply)
 
 /**
  * The function allows for playing a soundbite multiple times
@@ -68,14 +70,13 @@ function multicastPlay (VoiceConnection, soundPath, multicastFactor) {
 
 class MessageHandler {
   constructor () {
-    this.numberOfBasicVoiceReplies = 10;
-    this.numberOfUltraRareVoiceReplies = 5;
-    this.burpTimer = new Date(2020, 1, 1, 0, 0, 0);
-    this.numberOfBurpFiles = 3;
-    this.enableChatFilter = false;
-    this.isLoaded = false;
-    this.kanyeMusicTitles = [];
-    this.alwaysOn = false;
+    this.numberOfBasicVoiceReplies = 10
+    this.numberOfUltraRareVoiceReplies = 5
+    this.burpTimer = new Date(2020, 1, 1, 0, 0, 0)
+    this.enableChatFilter = false
+    this.isLoaded = false
+    this.kanyeMusicTitles = []
+    this.alwaysOn = false
   }
 
   /**
@@ -91,7 +92,7 @@ class MessageHandler {
         msg.content
     )
 
-    shopController.handleTransaction(msg);
+    shopController.handleTransaction(msg)
 
     if (this.enableChatFilter)
       msg.content
@@ -127,8 +128,8 @@ class MessageHandler {
     if (predefinedCommandsList.includes(msg.content.toLowerCase())) {
       dPS.defaultPlaySound(
         msg,
-        this.predefinedPathList[
-          this.predefinedCommandsList.indexOf(msg.content)
+        predefinedPathList[
+          predefinedCommandsList.indexOf(msg.content)
         ],
         this.alwaysOn
       )
@@ -159,44 +160,7 @@ class MessageHandler {
     }
 
     if (msg.content.toLowerCase().startsWith('!burp')) {
-      let timeLimit = 5
-      let now = new Date()
-      let cringeFactor = now - this.burpTimer
-      cringeFactor = Math.ceil(cringeFactor / (1000 * 60))
-      let burpMulticast = mC.calculateMulticast()
-      if (cringeFactor < timeLimit) {
-        msg.reply(
-          'The last burp command was ' +
-            cringeFactor.toString() +
-            ' min ago. Kinda cringe. Try again in ' +
-            (timeLimit - cringeFactor).toString() +
-            ' min'
-        )
-        dPS.defaultPlaySound(msg, './Music/Wee.mp3', alwaysOn)
-      } else {
-        if (!msg.member.voice.channel)
-          return msg.reply("Yo you ain't in the channel man not cool.")
-
-        if (msg.guild.me.voice.channel)
-          return msg.reply("I'm already talking lmao")
-
-        msg.member.voice.channel
-          .join()
-          .then(VoiceConnection => {
-            if (burpMulticast != 1)
-              msg.reply('**MULTICAST X' + burpMulticast.toString() + '!!**')
-            else msg.reply('Only once lmao')
-            let burpFileIndex =
-              Math.floor(Math.random() * this.numberOfBurpFiles) + 1
-            multicastPlay(
-              VoiceConnection,
-              './Music/Burp/Burp' + burpFileIndex.toString() + '.mp3',
-              burpMulticast
-            )
-          })
-          .catch(e => console.error(e))
-      }
-      //TODO: make multicastPlay a separate function
+      this.burpTimer = burp.handleBurp(msg, this.burpTimer, this.alwaysOn, numberOfBurpFiles)
     }
 
     if (msg.content.toLowerCase().startsWith('!help')) {
@@ -215,7 +179,7 @@ class MessageHandler {
     }
 
     if (msg.content.toLowerCase().startsWith('!kick')) {
-      kick.handleKick(msg);
+      kick.handleKick(msg)
     }
 
     if (msg.content.toLowerCase().startsWith('!mute')) {
@@ -235,7 +199,6 @@ class MessageHandler {
     }
 
     if (msg.content.toLowerCase().startsWith('!enablefilter')) {
-        console.log(this.adminName);
       if (msg.member.roles.cache.find(r => r.name === adminName)) {
         this.enableChatFilter = true
         msg.reply('The word filter is on.')
@@ -263,7 +226,6 @@ class MessageHandler {
     if (msg.content.toLowerCase().startsWith('!bankstatus')) {
       try {
         const res = await service.readAccount(msg.author.id)
-
         msg.reply('Your current balance is: ' + res.amount + ' CalutulCoins')
       } catch (e) {
         if (e instanceof KeyError) msg.reply(e.message)
@@ -321,8 +283,6 @@ class MessageHandler {
           .then(VoiceConnection => VoiceConnection.disconnect())
       }
     }
-
-    
   }
 }
 
