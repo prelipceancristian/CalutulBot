@@ -55,26 +55,10 @@ let burpTimer = new Date(2020, 1, 1, 0, 0, 0)
 
 ;[miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply)
 
-/**
- * The function allows for playing a soundbite multiple times
- * @param {VoiceConnection} VoiceConnection
- * @param {string} soundPath
- * @param {number} multicastFactor
- */
-function multicastPlay (VoiceConnection, soundPath, multicastFactor) {
-  if (multicastFactor != 0) {
-    VoiceConnection.play(soundPath).on('finish', () =>
-      multicastPlay(VoiceConnection, soundPath, multicastFactor - 1)
-    )
-    burpTimer = new Date()
-  } else VoiceConnection.disconnect()
-}
-
 class MessageHandler {
   constructor () {
     this.numberOfBasicVoiceReplies = 10
     this.numberOfUltraRareVoiceReplies = 5
-    burpTimer = new Date(2020, 1, 1, 0, 0, 0)
     this.enableChatFilter = false
     this.isLoaded = false
     this.kanyeMusicTitles = [];
