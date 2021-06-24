@@ -50,6 +50,8 @@ let autoReply = 'Automatically generated commands:\n'
 const adminName = 'monkey king'
 
 let bannedWords = sD.loadBannedWords()
+let alwaysOn = false;
+let burpTimer = new Date(2020, 1, 1, 0, 0, 0)
 
 ;[miscMusicTitles, autoReply] = sD.loadOutputMisc(miscMusicTitles, autoReply)
 
@@ -72,11 +74,10 @@ class MessageHandler {
   constructor () {
     this.numberOfBasicVoiceReplies = 10
     this.numberOfUltraRareVoiceReplies = 5
-    this.burpTimer = new Date(2020, 1, 1, 0, 0, 0)
+    burpTimer = new Date(2020, 1, 1, 0, 0, 0)
     this.enableChatFilter = false
     this.isLoaded = false
-    this.kanyeMusicTitles = []
-    this.alwaysOn = false
+    this.kanyeMusicTitles = [];
   }
 
   /**
@@ -131,7 +132,7 @@ class MessageHandler {
         predefinedPathList[
           predefinedCommandsList.indexOf(msg.content)
         ],
-        this.alwaysOn
+        alwaysOn
       )
     }
 
@@ -140,7 +141,7 @@ class MessageHandler {
       msg.content[0] == '!'
     ) {
       let miscFilePath = './Music/Misc/' + msg.content.replace('!', '') + '.mp3'
-      dPS.defaultPlaySound(msg, miscFilePath, this.alwaysOn)
+      dPS.defaultPlaySound(msg, miscFilePath, alwaysOn)
     }
 
     if (msg.content.toLowerCase().startsWith('!calutu')) {
@@ -156,11 +157,11 @@ class MessageHandler {
           Math.floor(Math.random() * this.numberOfBasicVoiceReplies) + 1
         newFilePath = './Music/Basic/Calutul' + newIndex.toString() + '.mp3'
       }
-      dPS.defaultPlaySound(msg, newFilePath, this.alwaysOn) //TODO: make this not dependent on the numberOf...
+      dPS.defaultPlaySound(msg, newFilePath, alwaysOn) //TODO: make this not dependent on the numberOf...
     }
 
     if (msg.content.toLowerCase().startsWith('!burp')) {
-      this.burpTimer = burp.handleBurp(msg, this.burpTimer, this.alwaysOn, numberOfBurpFiles)
+      burpTimer = burp.handleBurp(msg, burpTimer, alwaysOn, numberOfBurpFiles)
     }
 
     if (msg.content.toLowerCase().startsWith('!help')) {
@@ -175,7 +176,7 @@ class MessageHandler {
       let f =
         './Music/Kanye/' +
         kanyeMusicTitles[Math.floor(Math.random() * kanyeMusicTitles.length)]
-      dPS.defaultPlaySound(msg, f, this.alwaysOn)
+      dPS.defaultPlaySound(msg, f, alwaysOn)
     }
 
     if (msg.content.toLowerCase().startsWith('!kick')) {
@@ -275,7 +276,7 @@ class MessageHandler {
     }
 
     if (msg.content.toLowerCase().startsWith('!toggleoff')) {
-      this.alwaysOn = false
+      alwaysOn = false
       msg.channel.send('Always on mode is deactivated!')
       if (msg.guild.me.voice.channel) {
         msg.member.voice.channel
