@@ -1,5 +1,5 @@
 const dPS = require('./modules/defaultPlaySound')
-const mC = require('./modules/multicastPlay')
+const mC = require('./modules/MultiPlay/multicastPlay')
 const sD = require('./modules/setupData')
 const mt = require('./modules/mute')
 const lat = require('./modules/latin')
@@ -7,7 +7,7 @@ const em = require('./modules/emojify')
 const rep = require('./modules/replyLongText')
 const tp = require('./modules/tip')
 const kick = require('./modules/kick')
-const burp = require('./modules/burp')
+const burp = require('./modules/MultiPlay/burp')
 
 const Utils = require('./Utils')
 
@@ -21,7 +21,7 @@ const TransactionLogger = require('./modules/TransactionLogger/TransactionLogger
 const FileInventory = require('./modules/Inventory/FileInventory')
 const ShopController = require('./modules/Controllers/ShopController')
 
-let transactionLogger = new TransactionLogger('./logs.log')
+let transactionLogger = new TransactionLogger('./Logs/logs.log')
 let repo = new RepoFile('./bank.json')
 let service = new Service(repo)
 let shoprepo = new FileShopRepo('./shopItems.json')

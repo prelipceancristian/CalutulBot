@@ -1,5 +1,5 @@
 mC = require('./multicastPlay')
-dPS = require('./defaultPlaySound')
+dPS = require('../defaultPlaySound')
 mPS = require('./multicastPlaySound')
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     let cringeFactor = now - burpTimer
     cringeFactor = Math.ceil(cringeFactor / (1000 * 60))
     let burpMulticast = mC.calculateMulticast()
-    
+
     if (cringeFactor < timeLimit) {
       msg.reply(
         'The last burp command was ' +
