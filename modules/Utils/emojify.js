@@ -1,4 +1,4 @@
-var myEmojis = require('../myEmojis.json');
+var myEmojis = require('../Storage/myEmojis.json');
 
 module.exports = {
     /**

@@ -9,7 +9,7 @@ const tp = require('./modules/tip')
 const kick = require('./modules/kick')
 const burp = require('./modules/MultiPlay/burp')
 
-const Utils = require('./Utils')
+const Utils = require('./modules/Utils/Utils')
 
 const Service = require('./modules/CalutulBank/Business/Service')
 const KeyError = require('./modules/CalutulBank/Errors/KeyError')
@@ -22,10 +22,10 @@ const FileInventory = require('./modules/Inventory/FileInventory')
 const ShopController = require('./modules/Controllers/ShopController')
 
 let transactionLogger = new TransactionLogger('./Logs/logs.log')
-let repo = new RepoFile('./bank.json')
+let repo = new RepoFile('./Storage/bank.json')
 let service = new Service(repo)
-let shoprepo = new FileShopRepo('./shopItems.json')
-let inventory = new FileInventory('./inventory.json')
+let shoprepo = new FileShopRepo('./Storage/shopItems.json')
+let inventory = new FileInventory('./Storage/inventory.json')
 let shopkeeper = new Shopkeeper(repo, shoprepo, transactionLogger, inventory)
 let shopController = new ShopController(shopkeeper)
 

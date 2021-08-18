@@ -6,7 +6,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const MessageHandler = require('./MessageHandler')
-const Utils = require('./Utils')
+const Utils = require('./modules/Utils/Utils')
 
 const utils = new Utils()
 let messageHandler = new MessageHandler()
