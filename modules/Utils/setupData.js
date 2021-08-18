@@ -6,7 +6,7 @@ const fs = require('fs');
 
 module.exports = {
     /**
-     * The function reads synchronosly the available songs from a given txt file, converting them into an array of music titles(strings)
+     * The function synchronosly reads the available songs from a given txt file, converting them into an array of music titles(strings)
      * @returns {string|Array} The array of music bites titles
      */
     //TODO: this entire thing might be useless lmao

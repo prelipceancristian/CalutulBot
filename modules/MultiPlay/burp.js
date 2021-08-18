@@ -1,5 +1,5 @@
 mC = require('./multicastPlay')
-dPS = require('../defaultPlaySound')
+dPS = require('../Utils/defaultPlaySound')
 mPS = require('./multicastPlaySound')
 
 module.exports = {
