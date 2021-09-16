@@ -283,21 +283,12 @@ function checkMiscSounds (msg) {
 
 function logMessage (msg) {
   console.log(
-    msg.author.username +
-      ' at ' +
-      utils.stringDate() +
-      ' wrote: ' +
-      msg.content
+    msg.author.username + ' at ' + utils.stringDate() + ' wrote: ' + msg.content
   )
 }
 
 class MessageHandler {
-  constructor () {
-    this.numberOfBasicVoiceReplies = 10
-    this.numberOfUltraRareVoiceReplies = 5
-    this.enableChatFilter = false
-    this.isLoaded = false
-  }
+  constructor () {}
 
   /**
    * Checks the message content and acts accordingly
@@ -314,7 +305,7 @@ class MessageHandler {
     let keyword = msg.content.split(' ')[0].toLowerCase()
 
     const keywordToFunction = {
-      '!calutu' : handleKeywordCalutu,
+      '!calutu': handleKeywordCalutu,
       '!burp': handleKeywordBurp,
       '!help': handleKeywordHelp,
       '!autohelp': handleKeywordAutohelp,
