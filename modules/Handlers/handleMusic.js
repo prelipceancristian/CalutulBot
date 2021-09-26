@@ -1,6 +1,5 @@
 const MusicController = require('../Controllers/MusicController')
 const musicController = new MusicController()
-const youtubeSearch = require('youtube-search')
 
 async function handlePlay (msg) {
   const args = msg.content
