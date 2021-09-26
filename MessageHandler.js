@@ -8,6 +8,8 @@ const rep = require('./modules/Utils/replyLongText')
 const tp = require('./modules/Utils/tip')
 const kick = require('./modules/Utils/kick')
 const burp = require('./modules/MultiPlay/burp')
+const handleMusic = require('./modules/Handlers/handleMusic')
+const yt = require('./modules/Controllers/YoutubeController')
 
 const Utils = require('./modules/Utils/Utils')
 
@@ -322,7 +324,13 @@ class MessageHandler {
       '!banktip': handleKeywordBank, //TODO: fix multiple calls to this handler function
       '!tip': handleKeywordTip,
       '!toggleon': handleKeywordToggleon,
-      '!toggleoff': handleKeywordToggleoff
+      '!toggleoff': handleKeywordToggleoff,
+      '!play': handleMusic.handlePlay,
+      '!stop': handleMusic.handleStop,
+      '!pause': handleMusic.handlePause,
+      '!skip': handleMusic.handleSkip,
+      '!queue': handleMusic.handleQueue,
+      '!test': yt.check,
     }
 
     if (keyword in keywordToFunction) {

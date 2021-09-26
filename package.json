@@ -11,15 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
+    "axios": "^0.21.4",
     "discord.js": "^12.5.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "emoji.json": "^13.1.0",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.7",
     "fluent-ffmpeg": "^2.1.2",
     "mocha": "^8.3.2",
     "node-fetch": "^2.6.1",
-    "ytdl-core": "^4.4.3"
+    "opusscript": "0.0.8",
+    "ytdl-core": "^4.9.1"
   },
   "engines": {
     "node": "12.x",
