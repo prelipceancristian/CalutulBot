@@ -299,10 +299,10 @@ class MessageHandler {
   async handleMessage (msg) {
     logMessage(msg)
     shopController.handleTransaction(msg)
-    checkFilter(msg)
-    checkTextReply(msg)
-    checkPredefinedSounds(msg)
-    checkMiscSounds(msg)
+    //checkFilter(msg)
+    //checkTextReply(msg)
+    //checkPredefinedSounds(msg)
+    //checkMiscSounds(msg)
 
     let keyword = msg.content.split(' ')[0].toLowerCase()
 
