@@ -48,8 +48,14 @@ function handleQueue (msg) {
   }
 }
 
+function handleGoodMusic (msg) {
+  musicController.playGoodMusic = true
+  msg.reply('Only good music now')
+}
+
 exports.handlePlay = handlePlay
 exports.handleStop = handleStop
 exports.handlePause = handlePause
 exports.handleSkip = handleSkip
 exports.handleQueue = handleQueue
+exports.handleGoodMusic = handleGoodMusic

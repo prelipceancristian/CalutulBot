@@ -331,6 +331,7 @@ class MessageHandler {
       '!skip': handleMusic.handleSkip,
       '!queue': handleMusic.handleQueue,
       '!test': yt.check,
+      '!goodmusic': handleMusic.handleGoodMusic
     }
 
     if (keyword in keywordToFunction) {
